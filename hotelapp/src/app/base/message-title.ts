@@ -7,5 +7,7 @@ export class MessageText {
 export class ConfirmButtonText{
 
 }
+
 export class CancelButtonText{
+    
 }

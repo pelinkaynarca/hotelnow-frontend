@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { UiRoutingModule } from './ui/ui-routing.module';
 import { UiModule } from './ui/ui.module';
+import { AdminModule } from './admin/admin.module';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { UiModule } from './ui/ui.module';
     AppRoutingModule,
     HttpClientModule,
     UiRoutingModule,
-    UiModule
+    UiModule,
+    AdminModule,
+    AdminRoutingModule
   ],
   providers: [
     {provide:'baseUrl', useValue:environment.apiUrl, multi:true }

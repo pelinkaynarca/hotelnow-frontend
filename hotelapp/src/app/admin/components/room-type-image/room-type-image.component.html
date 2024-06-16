@@ -1,0 +1,11 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)" multiple>
+    <button (click)="onSubmit()">Upload</button>
+  </div>
+
+<div class="image-preview" *ngFor="let item of listImages">
+    <div class="images" *ngFor="let photo of item.photos">
+        <img [src]="photo.path">
+        <p>{{photo.fileName | titlecase}}</p>
+    </div>
+</div>

@@ -13,7 +13,7 @@ import { UpdateRoomTypeComponent } from './update-room-type/update-room-type.com
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports:[
     AddRoomTypeComponent,

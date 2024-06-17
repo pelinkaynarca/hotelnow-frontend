@@ -20,7 +20,7 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
     UiRoutingModule,
     UiModule,
     AdminModule,
-    AdminRoutingModule
+    AdminRoutingModule,
   ],
   providers: [
     {provide:'baseUrl', useValue:environment.apiUrl, multi:true }

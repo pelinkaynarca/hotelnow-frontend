@@ -30,9 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/sweetalert2/dist/sweetalert2.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/sweetalert2/dist/sweetalert2.all.min.js"
+            ]
           },
           "configurations": {
             "production": {

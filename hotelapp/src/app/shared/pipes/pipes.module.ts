@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LimitPipe } from './text-limit.pipe';
 
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [LimitPipe],
+  exports:[LimitPipe]
 })
 export class PipesModule { }

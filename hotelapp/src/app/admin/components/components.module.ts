@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RoomTypeModule } from './room-types/room-type.module';
 import { RoomTypeImageComponent } from './room-type-image/room-type-image.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RoomTypeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   exports:[
     RoomTypeImageComponent

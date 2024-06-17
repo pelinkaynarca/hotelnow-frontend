@@ -1,5 +1,5 @@
 export class ListImage{
     id: number;
-    fileName: string;
+    imageName: string;
     path: string;
 }

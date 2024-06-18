@@ -7,7 +7,7 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
-    RoomTypeImageComponent
+    RoomTypeImageComponent,
   ],
   imports: [
     CommonModule,

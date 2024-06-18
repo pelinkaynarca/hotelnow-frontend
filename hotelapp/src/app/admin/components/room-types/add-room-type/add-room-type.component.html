@@ -1,1 +1,36 @@
-<p>add-room-type works!</p>
+<form [formGroup]="createForm" (ngSubmit)="create()">
+    <div class="close">
+        <button routerLink="/room-types">X</button>
+    </div>
+
+    <div class="create">
+        <label>Oda Tipi Adı</label>
+        <input class="create-input" type="text" placeholder="Oda tipi adını yazınız" formControlName="name" />
+
+        <label>Oda Tipi Fiyatı</label>
+        <input class="create-input" type="number" placeholder="Oda tipi fiyatını yazınız" formControlName="price" />
+
+        <label >Oda Tipi Açıklaması</label>
+        <textarea class="create-input" placeholder="Oda tipi açıklamasını yazınız" tabindex="5"
+          formControlName="detail"></textarea>
+
+          <label>Oda Tipi Kapasitesi</label>
+          <input class="create-input" type="number" placeholder="Oda tipi kapasitesini yazınız" formControlName="capacity" />
+
+        <label>Oda Tipi Durumu</label>
+        <div class="radio-group">
+            <label>
+              <input type="radio" formControlName="display" [value]="true" />
+              Aktif
+            </label>
+            <label>
+              <input type="radio" formControlName="display" [value]="false" />
+              Pasif
+            </label>
+        </div>
+
+        <div class="create-button">
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Oda Tipi Ekle</button>
+          </div>
+    </div>
+</form>

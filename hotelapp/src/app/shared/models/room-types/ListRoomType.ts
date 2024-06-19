@@ -1,3 +1,5 @@
+import { ListImage } from "../images/list-image";
+
 export class ListRoomType{
     id: number;
     name: string;
@@ -6,4 +8,5 @@ export class ListRoomType{
     capacity: number;
     display: boolean;
     currency: string = "TRY";
+    photos?: ListImage[];
 }

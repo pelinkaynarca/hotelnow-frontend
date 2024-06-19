@@ -23,12 +23,12 @@
 
           <td>
             <i class="fa-solid fa-users fa-ml actor" title="Oda İşlemleri"
-              [routerLink]="['rooms', roomType.id]"></i>
-            <i class="fa-solid fa-user fa-ml director" title="Oda Tipi Fotoğrafları"
-              [routerLink]="['photos', roomType.id]"></i>
+              (click)="showRooms(roomType.id)"></i>
+            <i class="fa-solid fa-image fa-lg" title="Oda Tipi Fotoğrafları"
+             (click)="showPhotos(roomType.id)"></i>
           </td>
           <td>
-            <i class="fa-solid fa-image fa-lg" title="Oda Tipi Özellikleri"
+            <i class="fa-solid fa-user fa-ml director" title="Oda Tipi Özellikleri"
               [routerLink]="['main-facility', roomType.id]"></i>
           </td>
           <td>

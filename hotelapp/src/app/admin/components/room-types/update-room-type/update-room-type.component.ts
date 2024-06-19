@@ -76,7 +76,6 @@ export class UpdateRoomTypeComponent implements OnInit {
           this.router.navigate(['/room-types']);
         }
       }, error => {
-        this.sweetAlertService.showAlert(SweetStatus.serverError);
       });
     }
   }

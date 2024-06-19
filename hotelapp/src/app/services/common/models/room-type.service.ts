@@ -15,9 +15,13 @@ export class RoomTypeService {
     constructor(private httpClientService: HttpClientService){}
 
     async getAll(){
-      const observable: Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get(
-        {controller: 'room-types', action:'get-all'});
+      const observable: Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
+          controller: 'room-types', 
+          action:'get-all'
+        });
+
         const response = await firstValueFrom(observable);
+
         return response.statusCode === HttpStatusCode.Ok 
         ? response.result 
         : response.statusMessage;
@@ -37,7 +41,7 @@ export class RoomTypeService {
 
     async create(roomType:AddRoomType, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
       const observable: Observable<AddRoomType> = this.httpClientService.post({
-        controller: 'room-types',
+        controller: 'asdroom-types',
         action: 'create-room-type'
       }, roomType);
 

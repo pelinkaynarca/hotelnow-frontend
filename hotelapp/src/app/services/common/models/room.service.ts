@@ -17,8 +17,8 @@ export class RoomService {
   async getRoomsByRoomTypeId(roomTypeId:number){
     const observable : Observable<BaseResponse<ListRoom[]>> = this.httpClientService.get({
       controller:'rooms',
-      action: `by-room-type/${roomTypeId}`
-    });
+      action: 'by-room-type-id'
+    }, roomTypeId);
 
     const response = await firstValueFrom(observable);
 
@@ -30,7 +30,6 @@ export class RoomService {
   async create(room:AddRoom, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
     const observable: Observable<AddRoom> = this.httpClientService.post({
       controller: 'rooms',
-      action: 'create-room'
     }, room);
 
     await firstValueFrom(observable)
@@ -46,7 +45,6 @@ export class RoomService {
   async update(room:UpdateRoom, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
     const observable: Observable<UpdateRoom> = this.httpClientService.put({
       controller: 'rooms',
-      action: 'update-room'
     }, room);
 
     await firstValueFrom(observable)

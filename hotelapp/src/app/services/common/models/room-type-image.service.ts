@@ -18,8 +18,8 @@ export class RoomTypeImageService {
   async getImageRoomTypeById(roomTypeId: number) {
     const observable: Observable<BaseResponse<ListRoomTypeImage>> = this.httpClientService.get({
       controller: 'room-type-images',
-      action: `by-room-type/${roomTypeId}`
-    });
+      action: 'by-room-type-id'
+    },roomTypeId);
 
     const response = await firstValueFrom(observable);
 
@@ -51,7 +51,6 @@ export class RoomTypeImageService {
 
     const observable: Observable<unknown> = this.httpClientService.post({
       controller: 'room-type-images',
-      action: 'upload-image',
       queryString: queryString
     }, formData);
 

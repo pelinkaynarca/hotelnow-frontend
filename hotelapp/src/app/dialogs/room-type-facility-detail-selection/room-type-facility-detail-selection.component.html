@@ -1,10 +1,20 @@
-<div class="image-preview" *ngFor="let item of listDetails">
-    <h1>{{ item.categoryName }}</h1>
-    <div class="images" *ngFor="let detail of item.roomTypeFacilityDetailSelectionResponses">
-        <ul>
-            <li>
-                {{ detail.optionDescription | titlecase }}
-            </li>
-        </ul>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Oda Tipinin Detay Özellikleri</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="detail-container">
+            <div class="detail-preview" *ngFor="let item of listDetails">
+                <h1 class="text-2xl">{{ item.categoryName }}</h1>
+                <div class="details" *ngFor="let detail of item.roomTypeFacilityDetailSelectionResponses">
+                    <ul>
+                        <li class="list-disc">
+                            {{ detail.optionDescription | titlecase }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

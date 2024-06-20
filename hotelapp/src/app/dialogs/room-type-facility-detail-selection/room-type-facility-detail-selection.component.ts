@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlertService } from 'src/app/services/admin/sweet-alert.service';
 import { RoomTypeDetailSelectionService } from 'src/app/services/common/models/room-type-detail-selection.service';
 import { ListRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/list-room-type-detail-selection';
@@ -15,7 +16,8 @@ export class RoomTypeFacilityDetailSelectionComponent implements OnInit {
 
   constructor(
     private roomTypeDetailSelection: RoomTypeDetailSelectionService,
-    private sweetAlertService: SweetAlertService) { }
+    private sweetAlertService: SweetAlertService,
+    private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -30,5 +32,9 @@ export class RoomTypeFacilityDetailSelectionComponent implements OnInit {
         console.log(this.listDetails);
       })
     }
+  }
+
+  close() {
+    this.activeModal.close();
   }
 }

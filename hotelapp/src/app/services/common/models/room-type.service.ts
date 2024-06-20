@@ -16,8 +16,7 @@ export class RoomTypeService {
 
     async getAll(){
       const observable: Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
-          controller: 'room-types', 
-          action:'get-all'
+          controller: 'room-types'
         });
 
         const response = await firstValueFrom(observable);
@@ -41,8 +40,7 @@ export class RoomTypeService {
 
     async create(roomType:AddRoomType, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
       const observable: Observable<AddRoomType> = this.httpClientService.post({
-        controller: 'asdroom-types',
-        action: 'create-room-type'
+        controller: 'room-types'
       }, roomType);
 
       await firstValueFrom(observable)
@@ -57,8 +55,7 @@ export class RoomTypeService {
 
     async update(roomType:UpdateRoomType, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
       const observable: Observable<UpdateRoomType> = this.httpClientService.put({
-        controller: 'room-types',
-        action: 'update-room-type'
+        controller: 'room-types'
       }, roomType);
 
       await firstValueFrom(observable)

@@ -48,7 +48,7 @@ export class AddRoomTypeComponent implements OnInit {
       this.roomTypeService.create(roomType, async () => {
         const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
         if (result.dismiss) {
-          this.router.navigate(['/room-types']);
+          this.router.navigate(['/Admin', 'Room-Types']);
         }
       }, error => {
       });

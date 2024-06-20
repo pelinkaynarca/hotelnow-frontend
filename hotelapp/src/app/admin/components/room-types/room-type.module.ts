@@ -18,11 +18,6 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     PipesModule,
     RouterModule
-  ],
-  exports:[
-    AddRoomTypeComponent,
-    ListRoomTypeComponent,
-    UpdateRoomTypeComponent,
   ]
 })
 export class RoomTypeModule { }

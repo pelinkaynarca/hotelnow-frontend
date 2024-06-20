@@ -2,27 +2,6 @@
     max-height: 80vh; 
     overflow-y: auto; 
   }
-.upload-photo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.upload-header {
-    color: #424040;
-    padding: 2rem;
-    text-align: start;
-}
-
-.upload-header h1 {
-    font-weight: 800;
-    color: #2e4765;
-    font-size: 35px;
-    letter-spacing: 2px;
-    margin-bottom: 2rem;
-    width: 100%;
-}
 
 .upload-container {
     background-color: #ffffff;

@@ -16,7 +16,7 @@ export class RoomTypeFacilitySelectionService {
   async getByRoomTypeId(roomTypeId:number){
     const observable: Observable<BaseResponse<ListRoomTypeFacilitySelection[]>> = this.httpClientService.get({
       controller: 'room-type-main-facility-selections',
-      action: 'by-room-type'
+      action: 'by-room-type-id'
     }, roomTypeId);
 
     const response = await firstValueFrom(observable);
@@ -28,8 +28,7 @@ export class RoomTypeFacilitySelectionService {
 
   async create(detail:AddRoomTypeFacilitySelection, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
     const observable: Observable<AddRoomTypeFacilitySelection> = this.httpClientService.post({
-      controller: 'room-type-main-facility-selections',
-      action: 'create-main-facility'
+      controller: 'room-type-main-facility-selections'
     }, detail);
 
     await firstValueFrom(observable)

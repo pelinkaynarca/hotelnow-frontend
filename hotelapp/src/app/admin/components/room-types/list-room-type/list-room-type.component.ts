@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
+import { RoomTypeFacilityDetailSelectionComponent } from 'src/app/dialogs/room-type-facility-detail-selection/room-type-facility-detail-selection.component';
+import { RoomTypeFacilitySelectionComponent } from 'src/app/dialogs/room-type-facility-selection/room-type-facility-selection.component';
 import { RoomTypeImageComponent } from 'src/app/dialogs/room-type-image/room-type-image.component';
 import { RoomComponent } from 'src/app/dialogs/room/room.component';
 import { SweetAlertService } from 'src/app/services/admin/sweet-alert.service';
@@ -14,29 +16,33 @@ import { ListRoomType } from 'src/app/shared/models/room-types/ListRoomType';
 })
 export class ListRoomTypeComponent implements OnInit {
   listRoomTypes: ListRoomType[] = [];
-  constructor(private roomTypeService: RoomTypeService, private sweetAlertService: SweetAlertService, private dialogService:DialogService){}
+  constructor(private roomTypeService: RoomTypeService, private sweetAlertService: SweetAlertService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.getAll();
   }
 
-  async getAll(){
-    return this.roomTypeService.getAll().then(roomTypeData =>{
+  async getAll() {
+    return this.roomTypeService.getAll().then(roomTypeData => {
       this.listRoomTypes = roomTypeData as ListRoomType[];
     })
   }
 
-  async delete(id:number){
+  getDisplayText(displayValue: boolean): string {
+    return displayValue ? 'Aktif' : 'Kapalı';
+  }
+
+  async delete(id: number) {
     const sweetAlertResult = await this.sweetAlertService.showAlert(SweetStatus.deletedQuestion);
-    if(sweetAlertResult.isConfirmed){
-      this.roomTypeService.delete(id, ()=>{
+    if (sweetAlertResult.isConfirmed) {
+      this.roomTypeService.delete(id, () => {
         this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
       },
-      error => {
-     })
-      .then(() => {
-        this.getAll();
-      });
+        error => {
+        })
+        .then(() => {
+          this.getAll();
+        });
     }
   }
 
@@ -55,6 +61,30 @@ export class ListRoomTypeComponent implements OnInit {
   async showRooms(roomTypeId: number) {
     this.dialogService.openDialog({
       componentType: RoomComponent,
+      data: { roomTypeId },
+      options: {
+        size: 'lg',
+        backdrop: 'static',
+        centered: true
+      }
+    });
+  }
+
+  async showFacilitySelection(roomTypeId: number) {
+    this.dialogService.openDialog({
+      componentType: RoomTypeFacilitySelectionComponent,
+      data: { roomTypeId },
+      options: {
+        size: 'lg',
+        backdrop: 'static',
+        centered: true
+      }
+    });
+  }
+
+  async showFacilityDetailSelection(roomTypeId: number) {
+    this.dialogService.openDialog({
+      componentType: RoomTypeFacilityDetailSelectionComponent,
       data: { roomTypeId },
       options: {
         size: 'lg',

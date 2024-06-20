@@ -1,0 +1,10 @@
+<div class="image-preview" *ngFor="let item of listDetails">
+    <h1>{{ item.categoryName }}</h1>
+    <div class="images" *ngFor="let detail of item.roomTypeFacilityDetailSelectionResponses">
+        <ul>
+            <li>
+                {{ detail.optionDescription | titlecase }}
+            </li>
+        </ul>
+    </div>
+</div>

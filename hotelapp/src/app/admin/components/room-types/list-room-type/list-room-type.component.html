@@ -1,42 +1,44 @@
-<div class="movie-create-button">
+<div class="room-create-button">
   <button [routerLink]="['create']">+ Oda Tipi Ekle</button>
 </div>
 <div class="table-wrapper">
-    <table class="lg-table">
-      <thead>
-        <tr>
-          <th>Oda Tipi Adı</th>
-          <th>Oda Tipi Kapasitesi</th>
-          <th>Oda Tipi Durumu</th>
-          <th>Oda Tipi Fiyatı</th>
-          <th>Oda İşlemleri</th>
-          <th>Oda Tipi Fotoğrafları</th>
-          <th>Oda Tipi Özellikleri</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let roomType of listRoomTypes">
-          <td>{{ roomType.name | limitTo:15}}</td>
-          <td>{{ roomType.capacity }}</td>
-          <td>{{ roomType.display }}</td>
-          <td>{{ roomType.pricePerNight }}</td>
+  <table class="lg-table">
+    <thead>
+      <tr>
+        <th>Oda Tipi Adı</th>
+        <th>Oda Tipi Kapasitesi</th>
+        <th>Oda Tipi Durumu</th>
+        <th>Oda Tipi Fiyatı</th>
+        <th>Oda İşlemleri</th>
+        <th>Oda Tipi Fotoğrafları</th>
+        <th>Oda Tipi Özellikleri</th>
+        <th>Oda Tipi İşlemleri</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let roomType of listRoomTypes">
+        <td>{{ roomType.name | limitTo:15}}</td>
+        <td>{{ roomType.capacity }} Kişilik</td>
+        <td>{{ getDisplayText(roomType.display) }}</td>
+        <td>{{ roomType.pricePerNight }} ₺</td>
 
-          <td>
-            <i class="fa-solid fa-users fa-ml actor" title="Oda İşlemleri"
-              (click)="showRooms(roomType.id)"></i>
-            <i class="fa-solid fa-image fa-lg" title="Oda Tipi Fotoğrafları"
-             (click)="showPhotos(roomType.id)"></i>
-          </td>
-          <td>
-            <i class="fa-solid fa-user fa-ml director" title="Oda Tipi Özellikleri"
-              [routerLink]="['main-facility', roomType.id]"></i>
-          </td>
-          <td>
-            <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle"
-              [routerLink]="['Edit', roomType.id]"></i>
-            <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="delete(roomType.id)"></i>
-          </td>
-        </tr>
-      <tbody>
-    </table>
-  </div>
+        <td>
+          <i class="fa-solid fa-door-open" title="Oda İşlemleri" (click)="showRooms(roomType.id)"></i>
+        </td>
+        <td>
+          <i class="fa-solid fa-image fa-lg" title="Oda Tipi Fotoğrafları" (click)="showPhotos(roomType.id)"></i>
+        </td>
+        <td>
+          <i class="fa-solid fa-clipboard-list" title="Oda Tipi Özellikleri"
+            (click)="showFacilitySelection(roomType.id)"></i>
+          <i class="fa-solid fa-clipboard-check" title="Oda Tipi Detayları"
+            (click)="showFacilityDetailSelection(roomType.id)"></i>
+        </td>
+        <td>
+          <i class="fa-solid fa-pen-to-square fa-lg update" title="Düzenle" [routerLink]="['Edit', roomType.id]"></i>
+          <i class="fa-solid fa-trash fa-lg delete" title="Sil" (click)="delete(roomType.id)"></i>
+        </td>
+      </tr>
+    <tbody>
+  </table>
+</div>

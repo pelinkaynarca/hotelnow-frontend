@@ -1,8 +1,8 @@
-<form [formGroup]="createForm" (ngSubmit)="create()">
+<div class="page-container">
+  <form [formGroup]="createForm" (ngSubmit)="create()">
     <div class="close">
         <button routerLink="/room-types">X</button>
     </div>
-
     <div class="create">
         <label>Oda Tipi Adı</label>
         <input class="create-input" type="text" placeholder="Oda tipi adını yazınız" formControlName="name" />
@@ -28,9 +28,9 @@
               Pasif
             </label>
         </div>
-
         <div class="create-button">
             <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Oda Tipi Ekle</button>
           </div>
     </div>
 </form>
+</div>

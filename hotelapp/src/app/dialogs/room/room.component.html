@@ -1,79 +1,86 @@
 <div class="modal-header">
-    <h5 class="modal-title">Oda Tipinin Fotoğraf İşlemleri</h5>
-    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+  <h5 class="modal-title">Oda Tipinin Fotoğraf İşlemleri</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 <div class="modal-body">
-<form #roomForm="ngForm">
-    <div class="room-list">
-      <h2>Oda Listesi</h2>
+  <form #roomForm="ngForm">
       <div class="room-tables">
-      <div class="room-button-container">
-        <div class="room-create-button">
-          <button (click)="showCreateForm()">+ Oda Ekle</button>
+        <div class="room-button-container">
+          <div class="room-create-button">
+            <button type="button" (click)="showCreateForm()">+ Oda Ekle</button>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="lg-table">
+            <thead>
+              <tr>
+                <th>Oda Numarası</th>
+                <th>Oda Durumu</th>
+                <th>Oda İşlemleri</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let room of listRooms">
+                <td>
+                  <ng-container *ngIf="editRoomId !== room.id; else editMode">
+                    {{ room.no }} Numaralı Oda
+                  </ng-container>
+                  <ng-template #editMode>
+                    <input type="number" name="no" [(ngModel)]="updateRoom.no" required />
+                  </ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="editRoomId !== room.id; else availableEditMode">
+                    {{ room.available ? 'Aktif' : 'Pasif' }}
+                  </ng-container>
+                  <ng-template #availableEditMode>
+                    <div class="radio-group">
+                      <label>
+                        <input type="radio" name="available" [(ngModel)]="updateRoom.available" [value]="true" />
+                        Aktif
+                      </label>
+                      <label>
+                        <input type="radio" name="available" [(ngModel)]="updateRoom.available" [value]="false" />
+                        Pasif
+                      </label>
+                    </div>
+                  </ng-template>
+                </td>
+                <td class="room-icon">
+                  <ng-container *ngIf="editRoomId !== room.id">
+                    <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(room.id)"></i>
+                    <i class="fa-solid fa-trash fa-lg" (click)="delete(room.id)"></i>
+                  </ng-container>
+                  <ng-container *ngIf="editRoomId === room.id">
+                    <i class="fa-solid fa-check fa-lg" (click)="update(room.id, 'check')"></i>
+                    <i class="fa-solid fa-xmark fa-lg" (click)="update(room.id, 'cancel')"></i>
+                  </ng-container>
+                </td>
+              </tr>
+              <tr *ngIf="showCreateFormFlag === true">
+                <td>
+                  <input type="number" name="no" [(ngModel)]="addRoom.no" placeholder="Oda Adı" required />
+                </td>
+                <td>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" name="available" [(ngModel)]="addRoom.available" [value]="true" />
+                      Aktif
+                    </label>
+                    <label>
+                      <input type="radio" name="available" [(ngModel)]="addRoom.available" [value]="false" />
+                      Pasif
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <i class="fa-solid fa-check fa-lg" (click)="onSubmit()"></i>
+                  <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm()"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="table-wrapper">
-        <table class="lg-table">
-          <thead>
-            <tr>
-              <th>Oda Numarası</th>
-              <th>Oda Durumu</th>
-              <th>Oda İşlemleri</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let room of listRooms">
-              <td>
-                <ng-container *ngIf="editRoomId !== room.id; else editMode">
-                  {{ room.no }}
-                  {{room.available}}
-                </ng-container>
-                <ng-template #editMode>
-                  <input name="no" type="number" #no="ngModel" [(ngModel)]="updateRoom.no" (keydown.enter)="$event.preventDefault()"
-                  required/>
-                  <div class="radio-group">
-                    <label>
-                      <input type="radio" name="available" #available="ngModel" [(ngModel)]="updateRoom.available" [value]="true" />
-                      Aktif
-                    </label>
-                    <label>
-                        <input type="radio" name="available" #available="ngModel" [(ngModel)]="updateRoom.available" [value]="false" />
-                      Pasif
-                    </label>
-                </div>
-                </ng-template>
-              </td>
-              <td class="movie-icon">
-                <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(room.id)" *ngIf="room.id !== editRoomId"></i>
-                <i class="fa-solid fa-trash fa-lg" (click)="delete(room.id)" *ngIf="room.id !== editRoomId"></i>
-                <i class="fa-solid fa-check fa-lg" (click)="update(room.id, 'check')" *ngIf="room.id === editRoomId"></i>
-                <i class="fa-solid fa-xmark fa-lg" (click)="update(room.id, 'cancel')" *ngIf="room.id === editRoomId"></i>
-              </td>
-            </tr>
-            <tr *ngIf="showCreateFormFlag === true">
-              <td> 
-                  <input  type="number"  placeholder="Oda Adı" 
-                  (keydown.enter)="$event.preventDefault()" required>
-                  <div class="radio-group">
-                    <label>
-                      <input type="radio" name="available"  [value]="true" />
-                      Aktif
-                    </label>
-                    <label>
-                        <input type="radio" name="available" #available="ngModel" [(ngModel)]="addRoom.available" [value]="false" />
-                      Pasif
-                    </label>
-                </div>
-              </td>              
-              <td>
-                <i class="fa-solid fa-check fa-lg" (click)="onSubmit()"></i>
-                <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm()"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    </div>
   </form>
 </div>

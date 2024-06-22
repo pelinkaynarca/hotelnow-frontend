@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
-import { AddRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/add-room-type-detail-selection';
 import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { ListRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/list-room-type-detail-selection';
 import { HttpStatusCode } from '@angular/common/http';
+import { AddRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/add-room-type-detail-selection';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,8 @@ export class RoomTypeDetailSelectionService {
       : response.statusMessage;
   }
 
-  async create(detail: AddRoomTypeDetailSelection, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
-    const observable: Observable<AddRoomTypeDetailSelection> = this.httpClientService.post({
+  async create(detail: AddRoomTypeDetailSelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+    const observable: Observable<AddRoomTypeDetailSelection[]> = this.httpClientService.post({
       controller: 'room-type-facility-detail-selections'
     }, detail);
 

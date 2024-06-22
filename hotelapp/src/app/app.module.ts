@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,12 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
 import { DialogModule } from './dialogs/dialog.module';
 import { SweetAlertService } from './services/admin/sweet-alert.service';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, 'assets/i18n/');
+}
 
 @NgModule({
   declarations: [
@@ -24,7 +30,14 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     UiModule,
     AdminModule,
     AdminRoutingModule,
-    DialogModule
+    DialogModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {provide:'baseUrl', useValue:environment.apiUrl, multi:true },

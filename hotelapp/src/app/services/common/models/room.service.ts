@@ -17,7 +17,7 @@ export class RoomService {
   async getRoomsByRoomTypeId(roomTypeId:number){
     const observable : Observable<BaseResponse<ListRoom[]>> = this.httpClientService.get({
       controller:'rooms',
-      action: 'by-room-type-id'
+      action: 'by-room-type-id' 
     }, roomTypeId);
 
     const response = await firstValueFrom(observable);

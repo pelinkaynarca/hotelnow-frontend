@@ -5,6 +5,8 @@ import { ListRoomTypeFacilitySelection } from 'src/app/shared/models/room-type-f
 import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { HttpStatusCode } from '@angular/common/http';
+import { UpdateRoomTypeFacilitySelection } from 'src/app/shared/models/room-type-facility-selection/update-room-type-facility-selection';
+import { RoomTypeFacilitySelection } from 'src/app/shared/models/room-type-facility-selection/room-type-facility-selection';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +28,10 @@ export class RoomTypeFacilitySelectionService {
       : response.statusMessage;
   }
 
-  async create(detail:AddRoomTypeFacilitySelection, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
-    const observable: Observable<AddRoomTypeFacilitySelection> = this.httpClientService.post({
+  async create(selection:AddRoomTypeFacilitySelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+    const observable: Observable<AddRoomTypeFacilitySelection[]> = this.httpClientService.post({
       controller: 'room-type-main-facility-selections'
-    }, detail);
+    }, selection);
 
     await firstValueFrom(observable)
       .then(response => {
@@ -39,5 +41,29 @@ export class RoomTypeFacilitySelectionService {
       .catch(errorResponse => {
         errorCallBack(errorResponse);
       })
+  }
+
+  async update(selection:UpdateRoomTypeFacilitySelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+    const observable: Observable<AddRoomTypeFacilitySelection[]> = this.httpClientService.post({
+      controller: 'room-type-main-facility-selections'
+    }, selection);
+
+    await firstValueFrom(observable)
+      .then(response => {
+        successCallBack();
+        return response;
+      })
+      .catch(errorResponse => {
+        errorCallBack(errorResponse);
+      })
+  }
+
+  async delete(id: number) {
+      const observable: Observable<RoomTypeFacilitySelection> = this.httpClientService.delete({
+        controller: 'room-type-main-facility-selections'
+      }, id);
+
+      await firstValueFrom(observable);
+    
   }
 }

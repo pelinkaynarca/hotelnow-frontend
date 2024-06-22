@@ -4,17 +4,15 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
     </div>
     <div class="modal-body">
-        <div class="detail-container">
-            <div class="detail-preview" *ngFor="let item of listDetails">
-                <h1 class="text-2xl">{{ item.categoryName }}</h1>
-                <div class="details" *ngFor="let detail of item.roomTypeFacilityDetailSelectionResponses">
-                    <ul>
-                        <li class="list-disc">
-                            {{ detail.optionDescription | titlecase }}
-                        </li>
-                    </ul>
+        <form #selectionForm="ngForm" (ngSubmit)="onSubmit()">
+            <div *ngFor="let category of listCategories; let i = index">
+                <h1>{{ category.title }}</h1>
+                <div *ngFor="let option of category.roomTypeFacilityOptionResponse; let j = index">
+                    <input type="checkbox" [checked]="isSelected(option.description)" id="{{ 'option_' + i + '_' + j }}" name="options" [(ngModel)]="option.display" />
+                    <label for="{{ 'option_' + i + '_' + j }}">{{ option.description }}</label>
                 </div>
             </div>
-        </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </div>

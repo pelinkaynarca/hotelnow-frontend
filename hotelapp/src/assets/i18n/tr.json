@@ -1,0 +1,28 @@
+{
+  "HOME": {
+    "TITLE": "Oda Tipleri",
+    "SELECT": "Dil Seçiniz",
+    "TABLE_HEADERS": {
+      "NAME": "Oda Tipi Adı",
+      "CAPACITY": "Oda Tipi Kapasitesi",
+      "STATUS": "Oda Tipi Durumu",
+      "PRICE": "Oda Tipi Fiyatı",
+      "ROOM_OPERATIONS": "Oda İşlemleri",
+      "ROOM_PHOTOS": "Oda Tipi Fotoğrafları",
+      "ROOM_FEATURES": "Oda Tipi Özellikleri",
+      "ROOM_ACTIONS": "Oda Tipi İşlemleri"
+    },
+    "DISPLAY": {
+      "ACTIVE": "Aktif",
+      "INACTIVE": "Kapalı"
+    },
+    "BUTTONS": {
+      "ADD_ROOM_TYPE": "+ Oda Tipi Ekle",
+      "DELETE": "Sil",
+      "EDIT": "Düzenle"
+    },
+    "ROOM_TYPES":{
+      "NAME": "{{value}}"
+    }
+  }
+}

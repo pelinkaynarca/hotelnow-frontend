@@ -16,7 +16,10 @@ import { ListRoomType } from 'src/app/shared/models/room-types/ListRoomType';
 })
 export class ListRoomTypeComponent implements OnInit {
   listRoomTypes: ListRoomType[] = [];
-  constructor(private roomTypeService: RoomTypeService, private sweetAlertService: SweetAlertService, private dialogService: DialogService) { }
+  constructor(
+    private roomTypeService: RoomTypeService, 
+    private sweetAlertService: SweetAlertService, 
+    private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.getAll();

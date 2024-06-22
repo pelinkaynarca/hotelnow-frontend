@@ -1,0 +1,28 @@
+{
+  "HOME": {
+    "TITLE": "Room Types",
+    "SELECT": "Select Language",
+    "TABLE_HEADERS": {
+      "NAME": "Room Type Name",
+      "CAPACITY": "Room Type Capacity",
+      "STATUS": "Room Type Status",
+      "PRICE": "Room Type Price",
+      "ROOM_OPERATIONS": "Room Operations",
+      "ROOM_PHOTOS": "Room Type Photos",
+      "ROOM_FEATURES": "Room Type Features",
+      "ROOM_ACTIONS": "Room Type Actions"
+    },
+    "DISPLAY": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "BUTTONS": {
+      "ADD_ROOM_TYPE": "+ Add Room Type",
+      "DELETE": "Delete",
+      "EDIT": "Edit"
+    },
+    "ROOM_TYPES":{
+      "NAME": "{{value}}"
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { ListRoomTypeComponent } from './list-room-type/list-room-type.component
 import { UpdateRoomTypeComponent } from './update-room-type/update-room-type.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     PipesModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ]
 })
 export class RoomTypeModule { }

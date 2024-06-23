@@ -1,5 +1,5 @@
 export class RoomTypeFacilitySelection{
     id: number;
-    optionTitle: string;
+    optionDescription: string;
     display: boolean;
 }

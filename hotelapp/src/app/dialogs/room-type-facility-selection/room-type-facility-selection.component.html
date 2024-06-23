@@ -1,34 +1,20 @@
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title">Oda Tipinin Ana Özellikleri</h5>
-    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    <button type="button" class="btn-close text-gray-500 hover:text-gray-800 focus:outline-none" (click)="close()"></button>
   </div>
-  <div class="modal-body">
-
-        <label for="cars">Manzara:</label>
-
-<select name="cars" id="cars">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
-
-<label for="cars">Oda Büyüklüğü:</label>
-
-<select name="cars" id="cars">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
-
-<label for="cars">Oda Kapasitesi</label>
-
-<form #selectionForm="ngForm" (ngSubmit)="onSubmit()">
-  <div *ngFor="let option of listOptions">
-        <input type="checkbox" [checked]="isSelected(option.title)" (change)="onCheckboxChange(option)" id="{{ option.id }}" name="options" [(ngModel)]="option.display" />
-        <label for="{{ option.id }}">{{ option.title }} metre kare</label>
+  <div class="modal-body pt-2">
+    <form #selectionForm="ngForm" (ngSubmit)="onSubmit()">
+      <div *ngFor="let category of listCategories">
+        <h1>{{ category.title }}</h1>
+        <div *ngFor="let option of category.roomTypeMainFacilityOption">
+          <input type="checkbox" 
+          [checked]="isSelected(option.description) || option.display"
+          value="{{ category.id }}"
+            (change)="onCheckboxChange(option, category)"
+           />
+          <label>{{ option.description }}</label>
+        </div>
       </div>
       <button type="submit">Submit</button>
     </form>

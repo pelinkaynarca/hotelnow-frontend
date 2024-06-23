@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
-import { ListRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/list-room-type-detail-selection';
+import { ListRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selections/list-room-type-detail-selection';
 import { HttpStatusCode } from '@angular/common/http';
-import { AddRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selection/add-room-type-detail-selection';
+import { AddRoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selections/add-room-type-detail-selection';
+import { RoomTypeDetailSelection } from 'src/app/shared/models/room-type-detail-selections/room-type-detail-selection';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,13 @@ export class RoomTypeDetailSelectionService {
       .catch(errorResponse => {
         errorCallBack(errorResponse);
       })
+  }
+
+  async delete(id: number) {
+    const observable: Observable<BaseResponse<RoomTypeDetailSelection>> = this.httpClientService.delete({
+      controller: 'room-type-facility-detail-selections'
+    }, id);
+
+    await firstValueFrom(observable);
   }
 }

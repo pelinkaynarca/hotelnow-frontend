@@ -5,7 +5,6 @@ import { ListRoomTypeFacilitySelection } from 'src/app/shared/models/room-type-f
 import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { HttpStatusCode } from '@angular/common/http';
-import { UpdateRoomTypeFacilitySelection } from 'src/app/shared/models/room-type-facility-selection/update-room-type-facility-selection';
 import { RoomTypeFacilitySelection } from 'src/app/shared/models/room-type-facility-selection/room-type-facility-selection';
 
 @Injectable({
@@ -29,21 +28,6 @@ export class RoomTypeFacilitySelectionService {
   }
 
   async create(selection:AddRoomTypeFacilitySelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
-    const observable: Observable<AddRoomTypeFacilitySelection[]> = this.httpClientService.post({
-      controller: 'room-type-main-facility-selections'
-    }, selection);
-
-    await firstValueFrom(observable)
-      .then(response => {
-        successCallBack();
-        return response;
-      })
-      .catch(errorResponse => {
-        errorCallBack(errorResponse);
-      })
-  }
-
-  async update(selection:UpdateRoomTypeFacilitySelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
     const observable: Observable<AddRoomTypeFacilitySelection[]> = this.httpClientService.post({
       controller: 'room-type-main-facility-selections'
     }, selection);

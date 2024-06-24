@@ -1,4 +1,4 @@
-export class UpdateHotel{
+export class ListHotelForStaff{
     id: number;
     name: string;
     stars: number;

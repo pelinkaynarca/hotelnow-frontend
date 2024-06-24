@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  dropdownOpen = false;
 
+  toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  onOutsideClick() {
+    this.dropdownOpen = false;
+  }
 }

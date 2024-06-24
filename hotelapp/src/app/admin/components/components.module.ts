@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { DasboardComponent } from './dasboard/dasboard.component';
 import { StaffModule } from './staffs/staff.module';
+import { HotelModule } from './hotels/hotel.module';
+import { DistrictModule } from './districts/district.module';
+import { NeighborhoodModule } from './neighborhoods/neighborhood.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { StaffModule } from './staffs/staff.module';
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
-    StaffModule
+    StaffModule,
+    DistrictModule,
+    NeighborhoodModule,
+    HotelModule
   ],
   exports:[
   ]

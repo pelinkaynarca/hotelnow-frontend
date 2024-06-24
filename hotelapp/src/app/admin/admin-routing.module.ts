@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { RoomTypeRoutingModule } from './components/room-types/room-type-routing.module';
+import { StaffRoutingModule } from './components/staffs/staff-routing.module';
 
 const routes: Routes = [
   {
@@ -13,15 +14,19 @@ const routes: Routes = [
       {
         path: 'Room-Types',
         loadChildren: () => import('./components/room-types/room-type-routing.module').then(m => m.RoomTypeRoutingModule)
+      },
+      {
+        path: 'staffs',
+        loadChildren: () => import('./components/staffs/staff-routing.module').then(m => m.StaffRoutingModule)
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), RoomTypeRoutingModule],
+  imports: [RouterModule.forRoot(routes), RoomTypeRoutingModule, StaffRoutingModule],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { 
+export class AdminRoutingModule {
 
 }

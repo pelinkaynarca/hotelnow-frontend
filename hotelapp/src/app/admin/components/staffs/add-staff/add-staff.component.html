@@ -1,0 +1,35 @@
+<div class="page-container">
+  <form [formGroup]="createForm" (ngSubmit)="create()">
+    <div class="close">
+      <button routerLink="/Admin/staffs">X</button>
+    </div>
+    <div class="create">
+      <label>Adı</label>
+      <input class="create-input" type="text" placeholder="Adı" formControlName="firstName" />
+
+      <label>Soyadı</label>
+      <input class="create-input" type="text" placeholder="Soyadı" formControlName="lastName" />
+
+      <label>Tel No</label>
+      <input class="create-input" type="tel" placeholder="Tel No (10 haneli)" formControlName="phone" />
+
+      <label>E-Posta</label>
+      <input class="create-input" type="text" placeholder="E-Posta" formControlName="email" />
+
+      <label>Şifre</label>
+      <input class="create-input" type="password" placeholder="Şifre (En az 6 karakter)" formControlName="password" />
+
+      <label>Doğum Tarihi</label>
+      <input class="create-input" type="date" placeholder="Doğum Tarihi" formControlName="birthDate" />
+
+      <label>Cinsiyet</label>
+      <select formControlName="gender">
+        <option value="M">Erkek</option>
+        <option value="F">Kadın</option>
+      </select>
+      <div class="create-button">
+        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Personel Ekle</button>
+      </div>
+    </div>
+  </form>
+</div>

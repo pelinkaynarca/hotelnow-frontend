@@ -1,0 +1,100 @@
+// Ana sayfa container'ı
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Sayfa yüksekliğine göre ayarlayabilirsiniz
+  background-color: #f0f0f0; // İstediğiniz arka plan rengini ayarlayabilirsiniz
+}
+
+// Form container'ı
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px; // İstediğiniz genişliği ayarlayabilirsiniz
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .close {
+    align-self: flex-end;
+    button {
+      border: none;
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+      &:hover {
+        color: #555;
+      }
+    }
+  }
+
+  .create {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .create-input {
+      margin-top: 5px;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.15s ease-in-out;
+
+      &:focus {
+        outline: none;
+        border-color: #5b9aff; // İstenilen odak rengini ayarlayabilirsiniz
+      }
+    }
+
+    textarea.create-input {
+      height: 100px; // İstediğiniz yüksekliği ayarlayabilirsiniz
+    }
+
+    .radio-group {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      label {
+        margin-right: 20px;
+        input[type='radio'] {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .create-button {
+      margin-top: 20px;
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

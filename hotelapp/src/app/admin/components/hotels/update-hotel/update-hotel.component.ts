@@ -137,7 +137,7 @@ export class UpdateHotelComponent implements OnInit {
         updatedHotel,
         async () => {
           await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
-          this.router.navigate(['/Admin/hotel/edit']);
+          this.router.navigate(['/admin/hotel/edit']);
         },
         (error) => {
           console.error('Update hotel error:', error);

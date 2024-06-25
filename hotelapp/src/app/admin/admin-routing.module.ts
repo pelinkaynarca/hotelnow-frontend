@@ -4,8 +4,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoomTypeRoutingModule } from './components/room-types/room-type-routing.module';
 import { StaffRoutingModule } from './components/staffs/staff-routing.module';
-import { ListNeighborhoodComponent } from './components/neighborhoods/list-neighborhood/list-neighborhood.component';
-import { ListDistrictComponent } from './components/districts/list-district/list-district.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
@@ -34,12 +32,14 @@ const routes: Routes = [
       },
       {
         path: 'neighborhoods',
-        component: ListNeighborhoodComponent
+        loadChildren: () => import('./components/neighborhoods/neighborhood.module')
+        .then(m => m.NeighborhoodModule)
       },
       {
         path: 'districts',
-        component: ListDistrictComponent
-      }, 
+        loadChildren: () => import('./components/districts/district.module')
+        .then(m => m.DistrictModule)
+      },
     ]
   },
   {

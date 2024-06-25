@@ -38,7 +38,20 @@ export class RoomTypeService {
         : response.statusMessage;
     }
 
-    async create(roomType:AddRoomType, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+    async getByHotelId(hotelId: number){
+      const observable:Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
+        controller: 'room-types',
+        action: 'by-hotel-id'
+      },hotelId);
+
+      const response = await firstValueFrom(observable);
+
+      return response.statusCode === HttpStatusCode.Ok
+        ? response.result
+        : response.statusMessage;
+    }
+
+    async create(roomType:AddRoomType, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
       const observable: Observable<AddRoomType> = this.httpClientService.post({
         controller: 'room-types'
       }, roomType);
@@ -53,7 +66,7 @@ export class RoomTypeService {
       })
     }
 
-    async update(roomType:UpdateRoomType, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+    async update(roomType:UpdateRoomType, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
       const observable: Observable<UpdateRoomType> = this.httpClientService.put({
         controller: 'room-types'
       }, roomType);
@@ -68,7 +81,7 @@ export class RoomTypeService {
       })
     }
 
-    async delete(id: number, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+    async delete(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
       const observable:Observable<BaseResponse<ListRoomType>> = this.httpClientService.delete({
         controller:'room-types'
       }, id);

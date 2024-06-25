@@ -5,7 +5,10 @@ export class ListRoomType{
     name: string;
     pricePerNight: number;
     description: string;
-    capacity: number;
+    size: number;
+    bedTypeName: number;
+    viewTypeName: number;
+    capacity: Uint8Array;
     display: boolean;
     currency: string = "TRY";
     photos?: ListImage[];

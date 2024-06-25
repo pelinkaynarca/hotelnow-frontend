@@ -35,7 +35,7 @@ export class RoomTypeImageService {
     }
   }
 
-  async uploadPhoto(uploads: AddRoomTypeImage[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+  async uploadPhoto(uploads: AddRoomTypeImage[], successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const formData: FormData = new FormData();
 
     uploads.forEach(upload => {
@@ -64,7 +64,7 @@ export class RoomTypeImageService {
       })
   }
 
-  async deleteImage(id: number, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+  async deleteImage(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<BaseResponse<number>> = this.httpClientService.delete({
       controller: 'room-type-images'
     }, id);

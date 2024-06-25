@@ -1,7 +1,7 @@
 <div class="page-container">
   <form [formGroup]="createForm" (ngSubmit)="create()">
     <div class="close">
-      <button routerLink="/Admin/Room-Types">X</button>
+      <button routerLink="/admin/room-types">X</button>
     </div>
     <div class="create">
       <label>Oda Tipi Adı</label>
@@ -17,6 +17,33 @@
       <label>Oda Tipi Kapasitesi</label>
       <input class="create-input" type="number" placeholder="Oda tipi kapasitesini yazınız"
         formControlName="capacity" />
+
+      <label>Oda Tipi Boyutu</label>
+      <input class="create-input" type="number" placeholder="Oda tipi boyutunu yazınız" formControlName="size" />
+
+      <label>Oda Yatak Tipi</label>
+      <select class="form-control create-select" formControlName="bedTypeId">
+        <option value="0" selected>Seçiniz</option>
+        <option *ngFor="let bedType of listBedTypes" [value]="bedType.id">{{ bedType.name }}
+        </option>
+      </select>
+      <div class="text-danger" *ngIf="isValid('bedTypeId')">
+        <small>
+          {{ createForm.get('bedTypeId').getError('categorySelected') }}
+        </small>
+      </div>
+
+      <label>Oda Manzara Tipi</label>
+      <select class="form-control create-select" formControlName="viewTypeId">
+        <option value="0" selected>Seçiniz</option>
+        <option *ngFor="let viewType of listViewTypes" [value]="viewType.id">{{ viewType.name }}
+        </option>
+      </select>
+      <div class="text-danger" *ngIf="isValid('viewTypeId')">
+        <small>
+          {{ createForm.get('viewTypeId').getError('categorySelected') }}
+        </small>
+      </div>
 
       <label>Oda Tipi Durumu</label>
       <div class="radio-group">

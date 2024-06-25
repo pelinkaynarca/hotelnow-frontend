@@ -27,7 +27,7 @@ export class RoomTypeDetailSelectionService {
       : response.statusMessage;
   }
 
-  async create(detail: AddRoomTypeDetailSelection[], successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+  async create(detail: AddRoomTypeDetailSelection[], successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const observable: Observable<AddRoomTypeDetailSelection[]> = this.httpClientService.post({
       controller: 'room-type-facility-detail-selections'
     }, detail);

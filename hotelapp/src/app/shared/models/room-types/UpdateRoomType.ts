@@ -3,7 +3,10 @@ export class UpdateRoomType{
         name: string;
         pricePerNight: number;
         description: string;
-        capacity: number;
+        size: number;
+        bedTypeId: number;
+        viewTypeId: number;
+        capacity: Uint8Array;
         display: boolean;
         currency: string = "TRY";
 }

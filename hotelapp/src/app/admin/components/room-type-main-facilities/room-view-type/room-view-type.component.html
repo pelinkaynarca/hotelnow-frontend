@@ -1,0 +1,71 @@
+<form #viewTypeForm="ngForm">
+    <div class="view-tables">
+      <div class="view-button-container">
+        <div class="view-create-button">
+          <button type="button" (click)="showCreateForm()">+ Mazara Türü Ekle</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="lg-table">
+          <thead>
+            <tr>
+              <th>Mazara Türünün Adı</th>
+              <th>Mazara Türünün İşlemleri</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let viewType of listViewTypes">
+              <td>
+                <ng-container *ngIf="editViewTypeId !== viewType.id; else editMode">
+                  {{ viewType.name }}
+                </ng-container>
+                <ng-template #editMode>
+                  <input
+                  type="text"
+                  [(ngModel)]="updateViewType.name"
+                  name="name"
+                  required
+                  minlength="5"
+                />
+                <div class="text-danger" *ngIf="viewTypeForm.controls['name']?.invalid && viewTypeForm.controls['name']?.touched">
+                  <small *ngIf="viewTypeForm.controls['name']?.errors?.['required']">Boş bırakılamaz.</small>
+                  <small *ngIf="viewTypeForm.controls['name']?.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                </div>
+                </ng-template>
+              </td>
+              <td class="view-icon">
+                <ng-container *ngIf="editViewTypeId !== viewType.id">
+                  <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(viewType.id)"></i>
+                  <i class="fa-solid fa-trash fa-lg" (click)="delete(viewType.id)"></i>
+                </ng-container>
+                <ng-container *ngIf="editViewTypeId === viewType.id">
+                  <i class="fa-solid fa-check fa-lg" (click)="update(viewType.id, 'check')"></i>
+                  <i class="fa-solid fa-xmark fa-lg" (click)="update(viewType.id, 'cancel')"></i>
+                </ng-container>
+              </td>
+            </tr>
+            <tr *ngIf="showCreateFormFlag === true">
+              <td>
+                <input
+                  type="text"
+                  [(ngModel)]="addViewType.name"
+                  name="name"
+                  placeholder="Mazara türünün adı"
+                  required
+                  minlength="5"
+                />
+                <div class="text-danger" *ngIf="viewTypeForm.controls['name']?.invalid && viewTypeForm.controls['name']?.touched">
+                  <small *ngIf="viewTypeForm.controls['name']?.errors?.['required']">Boş bırakılamaz.</small>
+                  <small *ngIf="viewTypeForm.controls['name']?.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+                </div>
+              </td>
+              <td>
+                <i class="fa-solid fa-check fa-lg" (click)="onSubmit()"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm()"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>

@@ -21,8 +21,9 @@
       "DELETE": "Delete",
       "EDIT": "Edit"
     },
-    "ROOM_TYPES":{
-      "NAME": "{{value}}"
+    "ROOM_TYPES": {
+      "NAME": "Room Type: {{value}}",
+      "PERSON": "Personality"
     }
   }
 }

@@ -29,5 +29,23 @@ export const SweetStatus = {
         showCancelButton: true,
         confirmButtonText: ConfirmButtonText.Okey,
         cancelButtonText: CancelButtonText.Cancel,
-    }
+    },
+    sweetExpired:{
+        position: Position.TopRight,
+        messageTitle: MessageTitle.Warning,
+        messageText: MessageText.Expired,
+        icon: MessageType.Error,
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
+    },
+    sweetUnauthorized:{
+        position: Position.TopRight,
+        messageTitle: MessageTitle.Warning,
+        messageText: MessageText.Unauthorized,
+        icon: MessageType.Error,
+        timerProgressBar: true,
+        toast: true,
+        delay: 1,
+    },
 }

@@ -10,7 +10,7 @@
       "ROOM_OPERATIONS": "Oda İşlemleri",
       "ROOM_PHOTOS": "Oda Tipi Fotoğrafları",
       "ROOM_FEATURES": "Oda Tipi Özellikleri",
-      "ROOM_ACTIONS": "Oda Tipi İşlemleri"
+      "ROOM_ACTIONS": "Oda Tipi Eylemleri"
     },
     "DISPLAY": {
       "ACTIVE": "Aktif",
@@ -21,8 +21,9 @@
       "DELETE": "Sil",
       "EDIT": "Düzenle"
     },
-    "ROOM_TYPES":{
-      "NAME": "{{value}}"
+    "ROOM_TYPES": {
+      "NAME": "Oda Türü: {{value}}",
+      "PERSON": "Kişilik"
     }
   }
 }

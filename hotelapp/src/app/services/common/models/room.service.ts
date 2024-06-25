@@ -27,7 +27,7 @@ export class RoomService {
         : response.statusMessage;
   }
 
-  async create(room:AddRoom, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+  async create(room:AddRoom, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
     const observable: Observable<AddRoom> = this.httpClientService.post({
       controller: 'rooms',
     }, room);
@@ -42,7 +42,7 @@ export class RoomService {
     })
   }
 
-  async update(room:UpdateRoom, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+  async update(room:UpdateRoom, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
     const observable: Observable<UpdateRoom> = this.httpClientService.put({
       controller: 'rooms',
     }, room);
@@ -57,7 +57,7 @@ export class RoomService {
     })
   }
 
-  async delete(id: number, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+  async delete(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
     const observable: Observable<BaseResponse<ListRoom>> = this.httpClientService.delete(
       {
         controller: 'rooms',

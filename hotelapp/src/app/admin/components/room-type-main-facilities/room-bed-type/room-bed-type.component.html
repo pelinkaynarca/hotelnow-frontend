@@ -1,0 +1,71 @@
+<form #bedTypeForm="ngForm">
+  <div class="bed-tables">
+    <div class="bed-button-container">
+      <div class="bed-create-button">
+        <button type="button" (click)="showCreateForm()">+ Yatak Tipi Ekle</button>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table class="lg-table">
+        <thead>
+          <tr>
+            <th>Yatak Tipinin Adı</th>
+            <th>Yatak Tipinin İşlemleri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bedType of listBedTypes">
+            <td>
+              <ng-container *ngIf="editBedTypeId !== bedType.id; else editMode">
+                {{ bedType.name }}
+              </ng-container>
+              <ng-template #editMode>
+                <input
+                type="text"
+                [(ngModel)]="updateBedType.name"
+                name="name"
+                required
+                minlength="5"
+              />
+              <div class="text-danger" *ngIf="bedTypeForm.controls['name']?.invalid && bedTypeForm.controls['name']?.touched">
+                <small *ngIf="bedTypeForm.controls['name']?.errors?.['required']">Boş bırakılamaz.</small>
+                <small *ngIf="bedTypeForm.controls['name']?.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+              </div>
+              </ng-template>
+            </td>
+            <td class="bed-icon">
+              <ng-container *ngIf="editBedTypeId !== bedType.id">
+                <i class="fa-solid fa-pen-to-square fa-lg" (click)="showUpdateForm(bedType.id)"></i>
+                <i class="fa-solid fa-trash fa-lg" (click)="delete(bedType.id)"></i>
+              </ng-container>
+              <ng-container *ngIf="editBedTypeId === bedType.id">
+                <i class="fa-solid fa-check fa-lg" (click)="update(bedType.id, 'check')"></i>
+                <i class="fa-solid fa-xmark fa-lg" (click)="update(bedType.id, 'cancel')"></i>
+              </ng-container>
+            </td>
+          </tr>
+          <tr *ngIf="showCreateFormFlag === true">
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="addBedType.name"
+                name="name"
+                placeholder="Yatak Tipinin adı"
+                required
+                minlength="5"
+              />
+              <div class="text-danger" *ngIf="bedTypeForm.controls['name']?.invalid && bedTypeForm.controls['name']?.touched">
+                <small *ngIf="bedTypeForm.controls['name']?.errors?.['required']">Boş bırakılamaz.</small>
+                <small *ngIf="bedTypeForm.controls['name']?.errors?.['minlength']">En az 5 karakter olmalıdır.</small>
+              </div>
+            </td>
+            <td>
+              <i class="fa-solid fa-check fa-lg" (click)="onSubmit()"></i>
+              <i class="fa-solid fa-xmark fa-lg" (click)="showCreateForm()"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

@@ -10,9 +10,9 @@ import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
     openDialog(dialogParameters: Partial<DialogParameters>): void {
         const options: NgbModalOptions = {
-          size: dialogParameters.options?.size || 'md',
-          backdrop: dialogParameters.options?.backdrop || true,
-          centered: dialogParameters.options?.centered || false,
+          size: dialogParameters.options?.size || 'lg',
+          backdrop: dialogParameters.options?.backdrop || 'static',
+          centered: dialogParameters.options?.centered || true,
         };
     
         const modalRef = this.dialog.open(dialogParameters.componentType, options);
@@ -43,7 +43,7 @@ import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
   }
   
   export class DialogOptions {
-    size?: 'sm' | 'lg' | 'xl' | 'md' = 'md';
-    backdrop?: boolean | 'static' = true;
-    centered?: boolean = false;
+    size?: 'sm' | 'lg' | 'xl' | 'md' = 'lg';
+    backdrop?: boolean | 'static' = 'static';
+    centered?: boolean = true;
   }

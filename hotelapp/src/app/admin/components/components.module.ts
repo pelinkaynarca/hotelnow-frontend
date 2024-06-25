@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RoomTypeModule } from './room-types/room-type.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
-import { DasboardComponent } from './dasboard/dasboard.component';
 import { StaffModule } from './staffs/staff.module';
 import { HotelModule } from './hotels/hotel.module';
 import { DistrictModule } from './districts/district.module';
 import { NeighborhoodModule } from './neighborhoods/neighborhood.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    DasboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

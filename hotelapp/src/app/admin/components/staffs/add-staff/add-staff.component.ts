@@ -44,7 +44,7 @@ export class AddStaffComponent {
       this.staffService.create(addStaffRequest, async () => {
         const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
         if (result.dismiss) {
-          this.router.navigate(['/Admin', 'staffs']);
+          this.router.navigate(['/admin', 'staffs']);
         }
       }, error => {
       });

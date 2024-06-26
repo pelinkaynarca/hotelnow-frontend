@@ -1,39 +1,52 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { jwtDecode } from 'jwt-decode';
+
+interface DecodedToken {
+  roles: string[];
+  hotelId?: number; // hotelId opsiyonel
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AuthService {
 
   constructor(private jwtHelper: JwtHelperService) { }
 
-  logout(){
+  logout() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
   }
 
-  identityCheck() {
-    const token = localStorage.getItem("token");
+  getToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
 
-    let expired: boolean;
-    try {
-      expired = this.jwtHelper.isTokenExpired(token);
-    } catch {
-      expired = true;
+  decodeToken(): DecodedToken | null {
+    const token = this.getToken();
+    if (token) {
+      return jwtDecode(token) as DecodedToken;
     }
-
-    _isAuthenticated = token != null && !expired;
+    return null;
   }
 
-  isLoggedIn(): boolean {
-    return localStorage.getItem('accessToken') !== null;
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return token != null && !this.jwtHelper.isTokenExpired(token);
   }
 
-  get isAuthenticated(): boolean {
-    return _isAuthenticated;
+  hasRole(role: string): boolean {
+    const decodedToken = this.decodeToken();
+    return decodedToken != null && decodedToken.roles.includes(role);
+  }
+
+  getHotelId(): number | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken.hotelId || null : null;
   }
 }
 
-export let _isAuthenticated: boolean;
 

@@ -7,8 +7,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = localStorage.getItem('accessToken');
-
-    if (req.url.includes('/api/auth/login') || req.url.includes('/api/auth/register')) {
+    const url = "http://localhost:8080/api";
+    
+    if (req.url.startsWith(`${url}/login`) || req.url.startsWith(`${url}/register`)) {
       return next.handle(req); 
     }
     

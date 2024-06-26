@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
 import { RoomTypeFacilityDetailSelectionComponent } from 'src/app/dialogs/room-type-facility-detail-selection/room-type-facility-detail-selection.component';
@@ -22,7 +23,8 @@ export class ListRoomTypeComponent implements OnInit {
     private roomTypeService: RoomTypeService, 
     private sweetAlertService: SweetAlertService, 
     private dialogService: DialogService,
-    translate: TranslateService 
+    translate: TranslateService,
+    private route: ActivatedRoute
   ) {
     this.translate = translate; 
     translate.addLangs(['en', 'tr']);
@@ -33,6 +35,7 @@ export class ListRoomTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hotelId = +this.route.snapshot.paramMap.get('hotelId')!;
     this.getByHotelId();
   }
 

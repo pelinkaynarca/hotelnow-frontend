@@ -9,7 +9,8 @@ export class AuthService {
   constructor(private jwtHelper: JwtHelperService) { }
 
   logout(): void {
-    localStorage.removeItem('token'); 
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 
   identityCheck() {
@@ -23,6 +24,10 @@ export class AuthService {
     }
 
     _isAuthenticated = token != null && !expired;
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('accessToken') !== null;
   }
 
   get isAuthenticated(): boolean {

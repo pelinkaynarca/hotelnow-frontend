@@ -33,7 +33,7 @@ export class ListRoomTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
+    this.getByHotelId();
   }
 
   async getAll() {

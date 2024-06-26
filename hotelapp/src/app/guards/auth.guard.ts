@@ -5,12 +5,13 @@ import { AuthService, _isAuthenticated } from "../services/common/auth.service";
 
 export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
+  const authService = inject(AuthService);
 
-  if (!_isAuthenticated) {
-    console.log('Token yok');
-    router.navigate(["admin/login"], { queryParams: { returnUrl: state.url } });
+  if (authService.isLoggedIn()) {
+    return true;
+  } else {
+    router.navigate(['/admin/login']);
+    return false;
   }
-  console.log('Token var')
-  return true;
 
 }

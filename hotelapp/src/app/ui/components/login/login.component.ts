@@ -37,21 +37,21 @@ export class LoginComponent implements OnInit{
   }
   
   async login() {
-    if (this.isLogin.valid) {
-      const formData = this.isLogin.value;
-      const login: UserLogin = {
-        email: formData.email,
-        password: formData.password,
-      };
-    await this.userAuthService.login(login, () => {
-      this.authService.identityCheck();
+  //   if (this.isLogin.valid) {
+  //     const formData = this.isLogin.value;
+  //     const login: UserLogin = {
+  //       email: formData.email,
+  //       password: formData.password,
+  //     };
+  //   await this.userAuthService.login(login, () => {
+  //     this.authService.identityCheck();
 
-      this.activatedRoute.queryParams.subscribe(params => {
-        const returnUrl: string = params["returnUrl"];
-        if (returnUrl)
-          this.router.navigate([returnUrl]);
-      });
-    });
-  }
+  //     this.activatedRoute.queryParams.subscribe(params => {
+  //       const returnUrl: string = params["returnUrl"];
+  //       if (returnUrl)
+  //         this.router.navigate([returnUrl]);
+  //     });
+  //   });
+  // }
 }
 }

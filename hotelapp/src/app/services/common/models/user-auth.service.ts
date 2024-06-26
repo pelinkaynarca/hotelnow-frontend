@@ -13,16 +13,20 @@ export class UserAuthService {
     constructor(private httpClientService: HttpClientService) { }
 
     async login(user: UserLogin, successCallBack: () => void): Promise<void> {
-        const observable: Observable<UserLogin | TokenResponse> = this.httpClientService.post<UserLogin | TokenResponse>({
+        const observable: Observable<any | TokenResponse> = this.httpClientService.post<any | TokenResponse>({
             controller: "auth",
             action: "login"
         }, user)
 
-        const tokenResponse: TokenResponse = await firstValueFrom(observable) as TokenResponse;
+        const tokenResponse = await firstValueFrom(observable);
+        console.log("Token Response:", tokenResponse);
 
-        if (tokenResponse) {
-            localStorage.setItem("accessToken", tokenResponse.token.accessToken);
-            localStorage.setItem("refreshToken", tokenResponse.token.refreshToken);
+        if (tokenResponse && tokenResponse.result && tokenResponse.result.token) {
+            const accessToken = tokenResponse.result.token;
+            localStorage.setItem("accessToken", accessToken);
+            successCallBack();
+        } else {
+            console.error("Token response is invalid. Details:", tokenResponse);
         }
 
         successCallBack();

@@ -5,12 +5,14 @@ import { PipesModule } from "../shared/pipes/pipes.module";
 import { RoomComponent } from './room/room.component';
 import { NgModule } from "@angular/core";
 import { RoomTypeFacilityDetailSelectionComponent } from './room-type-facility-detail-selection/room-type-facility-detail-selection.component';
+import { FacilityDetailSelectionComponent } from './facility-detail-selection/facility-detail-selection.component';
 
 @NgModule({
     declarations: [
     RoomTypeImageComponent,
     RoomComponent,
-    RoomTypeFacilityDetailSelectionComponent
+    RoomTypeFacilityDetailSelectionComponent,
+    FacilityDetailSelectionComponent
   ],
     imports:[
       ReactiveFormsModule,

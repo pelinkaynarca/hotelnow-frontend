@@ -14,6 +14,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { UiRoutingModule } from './ui/ui-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorHandlerInterceptorService,
       multi: true
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

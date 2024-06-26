@@ -14,7 +14,8 @@ export class UserService {
 
   async create(register: UserRegister, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
     const observable: Observable<UserRegister> = this.httpClientService.post({
-      controller: 'customers',
+      controller: 'auth',
+      action: 'register'
     }, register);
 
     await firstValueFrom(observable)

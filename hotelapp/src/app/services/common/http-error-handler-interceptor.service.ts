@@ -18,21 +18,21 @@ export class HttpErrorHandlerInterceptorService {
     return next.handle(req).pipe(
       catchError(error => {
         switch (error.status) {
-          case HttpStatusCode.Unauthorized:
-            const refreshToken = localStorage.getItem('refreshToken');
-            this.userAuthService.refreshTokenLogin(refreshToken);
-            if (!refreshToken) {
-              const url = this.router.url;
-              if (url == "/admin") {
-                this.sweetAlertService.showAlert(SweetStatus.sweetExpired);
-                this.router.navigate(['/admin/login']);
-              }
-              else {
-                this.sweetAlertService.showAlert(SweetStatus.sweetUnauthorized);
-                this.router.navigate(['/admin/login']);
-              }
-            }
-            break;
+          // case HttpStatusCode.Unauthorized:
+          //   const refreshToken = localStorage.getItem('refreshToken');
+          //   this.userAuthService.refreshTokenLogin(refreshToken);
+          //   if (!refreshToken) {
+          //     const url = this.router.url;
+          //     if (url == "/admin") {
+          //       this.sweetAlertService.showAlert(SweetStatus.sweetExpired);
+          //       this.router.navigate(['/admin/login']);
+          //     }
+          //     else {
+          //       this.sweetAlertService.showAlert(SweetStatus.sweetUnauthorized);
+          //       this.router.navigate(['/admin/login']);
+          //     }
+          //   }
+          //   break;
           case HttpStatusCode.InternalServerError:
           case HttpStatusCode.BadRequest:
           case HttpStatusCode.NotFound:

@@ -8,7 +8,7 @@ export class AuthService {
 
   constructor(private jwtHelper: JwtHelperService) { }
 
-  logout(): void {
+  logout(){
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
   }

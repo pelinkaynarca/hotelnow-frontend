@@ -1,0 +1,5 @@
+<select (change)="onSelectCity($event)">
+    <option *ngFor="let city of listCities" [value]="city.id">
+        {{ city.name }}
+    </option>
+</select>

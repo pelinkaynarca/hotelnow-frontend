@@ -8,10 +8,14 @@ import { HotelModule } from './hotels/hotel.module';
 import { DistrictModule } from './districts/district.module';
 import { NeighborhoodModule } from './neighborhoods/neighborhood.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FacilityCategoryModule } from './facility-categories/facility-category.module';
+import { RoomTypeDetailCategoryModule } from './room-type-detail-categories/room-type-detail-category.module';
+import { MainFacilityOptionModule } from './main-facility-options/main-facility-option.module';
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -22,7 +26,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     StaffModule,
     DistrictModule,
     NeighborhoodModule,
-    HotelModule
+    HotelModule,
+    FacilityCategoryModule,
+    RoomTypeDetailCategoryModule,
+    MainFacilityOptionModule
   ],
   exports:[
   ]

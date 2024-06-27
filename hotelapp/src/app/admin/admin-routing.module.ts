@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: LayoutComponent,
-     canActivate: [AuthGuard],
+    //  canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
       {
@@ -40,13 +40,30 @@ const routes: Routes = [
         loadChildren: () => import('./components/districts/district.module')
         .then(m => m.DistrictModule)
       },
+      {
+        path: 'cities',
+        loadChildren: () => import('./components/cities/city.module').then(m => m.CityModule)
+      },
+      {
+        path: 'facility-categories',
+        loadChildren: () => import('./components/facility-categories/facility-category.module').then(m => m.FacilityCategoryModule)
+      },
+      {
+        path: 'room-type-detail-categories',
+        loadChildren: () => import('./components/room-type-detail-categories/room-type-detail-category.module').then(m => m.RoomTypeDetailCategoryModule)
+      },
+      {
+        path: 'main-facility-options',
+        loadChildren: () => import('./components/main-facility-options/main-facility-option.module').then(m => m.MainFacilityOptionModule)
+      },
+      {
+        path: 'admin/login',
+        loadChildren: () => import('./components/login/login.module')
+        .then(m => m.LoginModule)
+      },
     ]
   },
-  {
-    path: 'admin/login',
-    loadChildren: () => import('./components/login/login.module')
-    .then(m => m.LoginModule)
-  },
+  
 ];
 
 @NgModule({

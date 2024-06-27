@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: LayoutComponent,
-    //  canActivate: [AuthGuard],
+     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
       {

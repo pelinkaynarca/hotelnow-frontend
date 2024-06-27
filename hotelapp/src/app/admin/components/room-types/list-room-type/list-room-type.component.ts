@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
 import { RoomTypeFacilityDetailSelectionComponent } from 'src/app/dialogs/room-type-facility-detail-selection/room-type-facility-detail-selection.component';
@@ -18,15 +17,12 @@ import { ListRoomType } from 'src/app/shared/models/room-types/ListRoomType';
 export class ListRoomTypeComponent implements OnInit {
   listRoomTypes: ListRoomType[] = [];
   translate: TranslateService;
-  hotelId: number;
   constructor(
-    private roomTypeService: RoomTypeService, 
-    private sweetAlertService: SweetAlertService, 
+    private roomTypeService: RoomTypeService,
+    private sweetAlertService: SweetAlertService,
     private dialogService: DialogService,
-    translate: TranslateService,
-    private route: ActivatedRoute
-  ) {
-    this.translate = translate; 
+    translate: TranslateService) {
+    this.translate = translate;
     translate.addLangs(['en', 'tr']);
     translate.setDefaultLang('en');
 
@@ -35,18 +31,12 @@ export class ListRoomTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hotelId = +this.route.snapshot.paramMap.get('hotelId')!;
-    this.getByHotelId();
+    this.getRoomTypeForStaff();
   }
 
-  async getAll() {
-      const roomTypeData = await this.roomTypeService.getAll();
-      this.listRoomTypes = roomTypeData as ListRoomType[];
-    } 
-
-  async getByHotelId(){
-    const roomTypeData = await this.roomTypeService.getByHotelId(this.hotelId);
-    this.listRoomTypes = roomTypeData as ListRoomType[];
+  async getRoomTypeForStaff() {
+    const data = await this.roomTypeService.getRoomTypeForStaff();
+    this.listRoomTypes = data as ListRoomType[];
   }
 
   getDisplayText(displayValue: boolean): string {
@@ -59,8 +49,8 @@ export class ListRoomTypeComponent implements OnInit {
       this.roomTypeService.delete(id, () => {
         this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
       }).then(() => {
-          this.getAll();
-        });
+        this.getRoomTypeForStaff();
+      });
     }
   }
 
@@ -82,7 +72,7 @@ export class ListRoomTypeComponent implements OnInit {
     this.dialogService.openDialog({
       componentType: RoomTypeFacilityDetailSelectionComponent,
       data: { roomTypeId },
-    
+
     });
   }
   changeLanguage(lang: string) {

@@ -38,19 +38,32 @@ export class RoomTypeService {
         : response.statusMessage;
     }
 
-    async getByHotelId(hotelId: number){
-      const observable:Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
+    async getByHotelId(hotelId:number){
+      const observable: Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
         controller: 'room-types',
         action: 'by-hotel-id'
-      },hotelId);
-
+      }, hotelId); 
+  
       const response = await firstValueFrom(observable);
-
+  
       return response.statusCode === HttpStatusCode.Ok
         ? response.result
         : response.statusMessage;
     }
 
+    async getRoomTypeForStaff(){
+      const observable: Observable<BaseResponse<ListRoomType[]>> = this.httpClientService.get({
+        controller: 'room-types',
+        action: 'room-type'
+      }); 
+  
+      const response = await firstValueFrom(observable);
+  
+      return response.statusCode === HttpStatusCode.Ok
+        ? response.result
+        : response.statusMessage;
+    }
+  
     async create(roomType:AddRoomType, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
       const observable: Observable<AddRoomType> = this.httpClientService.post({
         controller: 'room-types'

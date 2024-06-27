@@ -4,7 +4,6 @@ import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
   roles: string[];
-  hotelId?: number; // hotelId opsiyonel
 }
 
 @Injectable({
@@ -43,10 +42,6 @@ export class AuthService {
     return decodedToken != null && decodedToken.roles.includes(role);
   }
 
-  getHotelId(): number | null {
-    const decodedToken = this.decodeToken();
-    return decodedToken ? decodedToken.hotelId || null : null;
-  }
 }
 
 

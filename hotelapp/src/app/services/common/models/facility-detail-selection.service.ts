@@ -27,6 +27,20 @@ export class FacilityDetailSelectionService {
             : response.statusMessage;
     }
 
+    async getFacilityDetailSelenctionStaff() {
+        const observable: Observable<BaseResponse<ListFacilityDetailSelection[]>> = this.httpClientService.get({
+            controller: 'facility-detail-selections',
+            action: 'facility-detail-selection'
+        });
+
+        const response = await firstValueFrom(observable);
+
+        return response.statusCode === HttpStatusCode.Ok
+            ? response.result
+            : response.statusMessage;
+    }
+
+
     async create(detail: AddFacilityDetailSelection[], successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
         const observable: Observable<AddFacilityDetailSelection[]> = this.httpClientService.post({
             controller: 'facility-detail-selections'

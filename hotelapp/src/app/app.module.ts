@@ -10,11 +10,11 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
 import { DialogModule } from './dialogs/dialog.module';
 import { SweetAlertService } from './services/admin/sweet-alert.service';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { UiRoutingModule } from './ui/ui-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     UiRoutingModule,
     AdminModule,
     AdminRoutingModule,
-    DialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -40,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    DialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("token"),

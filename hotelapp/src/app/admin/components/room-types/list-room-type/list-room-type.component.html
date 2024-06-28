@@ -1,47 +1,50 @@
 <div class="room-create-button">
-  <button [routerLink]="['Create']">{{ 'HOME.BUTTONS.ADD_ROOM_TYPE' | translate }}</button>
+  <button [routerLink]="['Create']">Oda ekle</button>
+</div>
+<div>
+  <label for="currency">Para Birimi:</label>
+  <select id="currency" [(ngModel)]="selectedCurrency" (change)="updatePrices()">
+    <option value="TRY">TRY</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+  </select>
 </div>
 
 <div class="table-wrapper">
   <table class="lg-table">
     <thead>
       <tr>
-        <th>{{ 'HOME.TABLE_HEADERS.NAME' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.CAPACITY' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.STATUS' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.PRICE' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.ROOM_OPERATIONS' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.ROOM_PHOTOS' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.ROOM_FEATURES' | translate }}</th>
-        <th>{{ 'HOME.TABLE_HEADERS.ROOM_ACTIONS' | translate }}</th>
+        <th>Oda tipinin adı</th>
+        <th>Oda tipinin kapasitesi</th>
+        <th>Aktiflik durumu</th>
+        <th>Ücreti</th>
+        <th>Oda İşlemleri</th>
+        <th>Fotoğraf İşlemleri</th>
+        <th>Oda tipi detay işlemleri</th>
+        <th>Oda tipi genel işlemleri</th> 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let roomType of listRoomTypes">
-        <td>{{ roomType.name }}</td>
-        <td>{{ roomType.capacity }} {{ 'HOME.ROOM_TYPES.PERSON' | translate }}</td>
-        <td>{{ getDisplayText(roomType.display) }}</td>
-        <td>{{ roomType.pricePerNight }} ₺</td>
+        <td>{{ roomType.name | translate }}</td>
+        <td>{{ roomType.capacity }} Kişilik</td>
+        <td>{{ displayStatus(roomType.display) }}</td>
+        <td>{{ roomType.pricePerNight | number:'1.2-2' }} {{ selectedCurrency }}</td>
         <td>
-          <i class="fa-solid fa-door-open" title="{{ 'HOME.TABLE_HEADERS.ROOM_OPERATIONS' | translate }}" (click)="showRooms(roomType.id)"></i>
+          <i class="fa-solid fa-door-open" title="Odalar" (click)="showRooms(roomType.id)"></i>
         </td>
         <td>
-          <i class="fa-solid fa-image fa-lg" title="{{ 'HOME.TABLE_HEADERS.ROOM_PHOTOS' | translate }}" (click)="showPhotos(roomType.id)"></i>
+          <i class="fa-solid fa-image fa-lg" title="Oda tipinin fotoğrafları" (click)="showPhotos(roomType.id)"></i>
         </td>
         <td>
-          <i class="fa-solid fa-clipboard-check" title="{{ 'HOME.TABLE_HEADERS.ROOM_FEATURES' | translate }}"
+          <i class="fa-solid fa-clipboard-check" title="Oda tipinin detay özellikleri"
             (click)="showFacilityDetailSelection(roomType.id)"></i>
         </td>
         <td>
-          <i class="fa-solid fa-pen-to-square fa-lg update" title="{{ 'HOME.BUTTONS.EDIT' | translate }}" [routerLink]="['Edit', roomType.id]"></i>
-          <i class="fa-solid fa-trash fa-lg delete" title="{{ 'HOME.BUTTONS.DELETE' | translate }}" (click)="delete(roomType.id)"></i>
+          <i class="fa-solid fa-pen-to-square fa-lg update" title="Oda tipini düzenle" [routerLink]="['Edit', roomType.id]"></i>
+          <i class="fa-solid fa-trash fa-lg delete" title="Oda tipini sil" (click)="delete(roomType.id)"></i>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
-<div class="language-select">
-  <select #langSelect (change)="translate.use(langSelect.value)">
-    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-  </select>
 </div>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
 import { RoomTypeFacilityDetailSelectionComponent } from 'src/app/dialogs/room-type-facility-detail-selection/room-type-facility-detail-selection.component';
 import { RoomTypeImageComponent } from 'src/app/dialogs/room-type-image/room-type-image.component';
 import { RoomComponent } from 'src/app/dialogs/room/room.component';
 import { SweetAlertService } from 'src/app/services/admin/sweet-alert.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
+import { CurrencyService } from 'src/app/services/common/models/currency.service';
 import { RoomTypeService } from 'src/app/services/common/models/room-type.service';
 import { ListRoomType } from 'src/app/shared/models/room-types/ListRoomType';
 
@@ -16,19 +16,14 @@ import { ListRoomType } from 'src/app/shared/models/room-types/ListRoomType';
 })
 export class ListRoomTypeComponent implements OnInit {
   listRoomTypes: ListRoomType[] = [];
-  translate: TranslateService;
+  originalRoomTypes: ListRoomType[] = []; 
+  selectedCurrency: string = 'TRY';
+
   constructor(
     private roomTypeService: RoomTypeService,
     private sweetAlertService: SweetAlertService,
     private dialogService: DialogService,
-    translate: TranslateService) {
-    this.translate = translate;
-    translate.addLangs(['en', 'tr']);
-    translate.setDefaultLang('en');
-
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang && browserLang.match(/en|tr/) ? browserLang : 'en');
-  }
+    private currencyService: CurrencyService) {}
 
   ngOnInit(): void {
     this.getRoomTypeForStaff();
@@ -37,10 +32,8 @@ export class ListRoomTypeComponent implements OnInit {
   async getRoomTypeForStaff() {
     const data = await this.roomTypeService.getRoomTypeForStaff();
     this.listRoomTypes = data as ListRoomType[];
-  }
-
-  getDisplayText(displayValue: boolean): string {
-    return displayValue ? this.translate.instant('HOME.DISPLAY.ACTIVE') : this.translate.instant('HOME.DISPLAY.INACTIVE');
+    this.originalRoomTypes = JSON.parse(JSON.stringify(this.listRoomTypes));
+    await this.updatePrices();
   }
 
   async delete(id: number) {
@@ -52,6 +45,10 @@ export class ListRoomTypeComponent implements OnInit {
         this.getRoomTypeForStaff();
       });
     }
+  }
+
+  displayStatus(display: boolean): string {
+    return display ? 'Aktif' : 'Kapalı';
   }
 
   async showPhotos(roomTypeId: number) {
@@ -75,7 +72,12 @@ export class ListRoomTypeComponent implements OnInit {
 
     });
   }
-  changeLanguage(lang: string) {
-    this.translate.use(lang);
+
+  async updatePrices() {
+    for (let i = 0; i < this.listRoomTypes.length; i++) {
+      const originalPrice = this.originalRoomTypes[i].pricePerNight;
+      this.listRoomTypes[i].pricePerNight = await this.currencyService.convertCurrencyToTurkishLira(originalPrice, this.selectedCurrency);
+    }
   }
+
 }

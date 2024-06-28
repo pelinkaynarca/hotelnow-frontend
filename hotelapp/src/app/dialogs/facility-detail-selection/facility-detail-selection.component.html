@@ -1,12 +1,20 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title">Otel Detay Özellikleri</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+      <h5 class="modal-title">Otel Detay Özellikleri</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
     </div>
     <div class="modal-body">
-        <form #selectionForm="ngForm" (ngSubmit)="onSubmit()">
-          
-            <button type="submit">Submit</button>
-        </form>
+      <form #selectionForm="ngForm" (ngSubmit)="onSubmit()">
+        <div *ngFor="let category of facilityCategories">
+          <h1>{{ category.title }}</h1>
+          <div *ngFor="let option of category.facilityDetailOptionResponse">
+            <input type="checkbox" [checked]="isSelected(option.description)" 
+             name="options" [(ngModel)]="option.display" (change)="onCheckboxChange(option)"/>
+            <label>{{ option.description }}</label>
+        </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
-</div>
+  </div>
+  

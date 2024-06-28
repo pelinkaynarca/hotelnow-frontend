@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
 import { SweetAlertService } from 'src/app/services/admin/sweet-alert.service';
 import { RoomTypeDetailCategoryService } from 'src/app/services/common/models/room-type-detail-category.service';

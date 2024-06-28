@@ -16,7 +16,7 @@ export class MainFacilityOptionService {
 
   async getAll(){
     const observable : Observable<BaseResponse<ListMainFacilityOption[]>> = this.httpClientService.get({
-      controller: 'main-facility-option'
+      controller: 'main-facility-options'
     });
 
   const response = await firstValueFrom(observable);

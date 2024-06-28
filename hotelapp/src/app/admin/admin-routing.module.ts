@@ -56,14 +56,14 @@ const routes: Routes = [
         path: 'main-facility-options',
         loadChildren: () => import('./components/main-facility-options/main-facility-option.module').then(m => m.MainFacilityOptionModule)
       },
-      {
-        path: 'admin/login',
-        loadChildren: () => import('./components/login/login.module')
-        .then(m => m.LoginModule)
-      },
+     
     ]
   },
-  
+  {
+    path: 'admin/login',
+    loadChildren: () => import('./components/login/login.module')
+    .then(m => m.LoginModule)
+  },
 ];
 
 @NgModule({

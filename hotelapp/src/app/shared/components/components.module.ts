@@ -4,11 +4,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LangueComponent } from './langue/langue.component';
 
 
-
 @NgModule({
   declarations: [
     NotFoundComponent,
-    LangueComponent
+    LangueComponent,
   ],
   imports: [
     CommonModule

@@ -42,6 +42,10 @@ export class AuthService {
     return decodedToken != null && decodedToken.roles.includes(role);
   }
 
+  canShowForRoles(roles: string[]): boolean {
+    const decodedToken = this.decodeToken();
+    return decodedToken != null && roles.some(role => decodedToken.roles.includes(role));
+  }
 }
 
 

@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoomTypeRoutingModule } from './components/room-types/room-type-routing.module';
 import { StaffRoutingModule } from './components/staffs/staff-routing.module';
 import { AuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
 
 const routes: Routes = [
   {
@@ -15,20 +16,28 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       {
         path: 'room-types',
-        loadChildren: () => import('./components/room-types/room-type-routing.module').then(m => m.RoomTypeRoutingModule)
+        loadChildren: () => import('./components/room-types/room-type-routing.module').then(m => m.RoomTypeRoutingModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['MANAGER'] }
       },
       {
         path: 'staffs',
-        loadChildren: () => import('./components/staffs/staff-routing.module').then(m => m.StaffRoutingModule)
+        loadChildren: () => import('./components/staffs/staff-routing.module').then(m => m.StaffRoutingModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['MANAGER'] }
       },
       {
         path: 'hotel',
-        loadChildren: () => import('./components/hotels/hotel-routing.module').then(m => m.HotelRoutingModule)
+        loadChildren: () => import('./components/hotels/hotel-routing.module').then(m => m.HotelRoutingModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['MANAGER'] }
       },
       {
         path: 'room-type-main-facilities',
         loadChildren: () => import('./components/room-type-main-facilities/room-type-main-facility.module')
-        .then(m => m.RoomTypeMainFacilityModule)
+        .then(m => m.RoomTypeMainFacilityModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }
       },
       {
         path: 'neighborhoods',
@@ -54,7 +63,9 @@ const routes: Routes = [
       },
       {
         path: 'main-facility-options',
-        loadChildren: () => import('./components/main-facility-options/main-facility-option.module').then(m => m.MainFacilityOptionModule)
+        loadChildren: () => import('./components/main-facility-options/main-facility-option.module').then(m => m.MainFacilityOptionModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }
       },
      
     ]

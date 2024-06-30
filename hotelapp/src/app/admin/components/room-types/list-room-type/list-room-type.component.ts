@@ -76,7 +76,7 @@ export class ListRoomTypeComponent implements OnInit {
   async updatePrices() {
     for (let i = 0; i < this.listRoomTypes.length; i++) {
       const originalPrice = this.originalRoomTypes[i].pricePerNight;
-      this.listRoomTypes[i].pricePerNight = await this.currencyService.convertCurrencyToTurkishLira(originalPrice, this.selectedCurrency);
+      this.listRoomTypes[i].pricePerNight = await this.currencyService.convertAmountToCurrency(originalPrice, this.selectedCurrency);
     }
   }
 

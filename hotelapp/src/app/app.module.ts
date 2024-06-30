@@ -15,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedModule } from './shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     UiModule,
     UiRoutingModule,
+    SharedModule,
     AdminModule,
     AdminRoutingModule,
     TranslateModule.forRoot({

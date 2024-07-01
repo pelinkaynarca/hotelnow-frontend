@@ -6,13 +6,19 @@ import { RoomComponent } from './room/room.component';
 import { NgModule } from "@angular/core";
 import { RoomTypeFacilityDetailSelectionComponent } from './room-type-facility-detail-selection/room-type-facility-detail-selection.component';
 import { FacilityDetailSelectionComponent } from './facility-detail-selection/facility-detail-selection.component';
+import { MainFacilitySelectionComponent } from './main-facility-selection/main-facility-selection.component';
+import { LanguageComponent } from './language/language.component';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
     declarations: [
     RoomTypeImageComponent,
     RoomComponent,
     RoomTypeFacilityDetailSelectionComponent,
-    FacilityDetailSelectionComponent
+    FacilityDetailSelectionComponent,
+    MainFacilitySelectionComponent,
+    LanguageComponent,
+    CurrencyComponent
   ],
     imports:[
       ReactiveFormsModule,

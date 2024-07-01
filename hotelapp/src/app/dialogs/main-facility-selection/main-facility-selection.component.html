@@ -1,0 +1,40 @@
+<!-- <div class="modal-content flex flex-col gap-2 p-3">
+    <div class="modal-header">
+        <p class="modal-title text-3xl font-bold">OTEL ÖZELLİKLERİ</p>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div class="modal-body">
+        <form #selectionForm="ngForm">
+            <div *ngFor="let selection of mainFacilitySelections">
+                <input type="checkbox" [(ngModel)]="selectionForm.value[option.id]" name="option-{{ option.id }}"
+                    (change)="onCheckboxChange(option.id)">
+                <label>{{ option.title }}</label>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- <p class="text-3xl font-bold">OTEL İŞLEMLERİ</p>
+<form #selectionForm="ngForm">
+    <div *ngFor="let selection of mainFacilitySelections">
+        <input type="checkbox" [(ngModel)]="selection.display" name="option-{{ selection.id }}"
+            (change)="onCheckboxChange(selection)">
+        <label>{{ selection.optionTitle }}</label>
+    </div>
+    <button type="button" (click)="close()">Close</button>
+</form> -->
+<div class="modal-content flex flex-col gap-2 p-3">
+    <div class="modal-header">
+        <p class="modal-title text-3xl font-bold">OTEL ÖZELLİKLERİ</p>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div class="modal-body">
+        <div *ngFor="let option of facilityOptions">
+            <label>
+                <input type="checkbox" [checked]="isOptionSelected(option.id)"
+                    (change)="onCheckboxChange(option.id, $event)" />
+                {{ option.title }}
+            </label>
+        </div>
+    </div>
+</div>

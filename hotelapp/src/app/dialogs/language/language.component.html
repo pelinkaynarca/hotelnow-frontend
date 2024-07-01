@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h4 class="modal-title">Select Language</h4>
+    <button type="button" class="btn-close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <ul class="list-group">
+        <li *ngFor="let language of languages" class="list-group-item cursor-pointer"
+            (click)="selectLanguage(language)">{{ language }}</li>
+    </ul>
+</div>

@@ -1,11 +1,9 @@
-<div class="wrapper min-h-screen flex flex-col">
-    <app-header class="bg-white border-b border-gray-200 dark:bg-gray-900 h-16"></app-header>
-    <div class="flex flex-1">
-        <app-sidebar class="w-64 bg-gray-200 dark:bg-gray-800"></app-sidebar>
-        <div class="content flex-1 p-4">
-            <router-outlet></router-outlet>
-        </div>
+<div class="min-h-screen items-center flex flex-col">
+    <app-navbar class="w-full"></app-navbar>
+    <!-- <app-header class="bg-white border-b border-gray-200 dark:bg-gray-900 h-16"></app-header> -->
+    <!-- <app-sidebar class="w-64 bg-gray-200 dark:bg-gray-800"></app-sidebar> -->
+    <div class="content flex-grow flex flex-col w-full items-center px-12 lg:px-0 lg:w-large-default">
+        <router-outlet></router-outlet>
     </div>
-    <app-footer class="bg-white border-t border-gray-200 dark:bg-gray-900"></app-footer>
-  </div>
-  
+    <app-footer class="w-full bg-white border-t border-gray-200 dark:bg-gray-900"></app-footer>
+</div>

@@ -5,9 +5,15 @@ module.exports = {
     extend: {
       colors: {
         'primary-blue': '#4BA7B7',
-        'primary-blue-hover': '#3299ab',
+        'primary-blue-hover': 'rgba(50, 153, 171, 0.15)',
         'primary-white': '#FBFFF4',
         'accent-dark': '#292F36',
+      },
+      height: {
+        '18': '4.5rem',
+      },
+      width: {
+        'large-default': '1000px'
       },
       linearGradientDirections: {
         't': 'to top',

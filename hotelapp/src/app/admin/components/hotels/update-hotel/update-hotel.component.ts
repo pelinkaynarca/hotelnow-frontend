@@ -10,6 +10,9 @@ import { ListNeighborhood } from 'src/app/shared/models/neighborhoods/list-neigh
 import { NeighborhoodService } from 'src/app/services/common/models/neighborhood.service';
 import { ListDistrict } from 'src/app/shared/models/districts/list-district';
 import { DistrictService } from 'src/app/services/common/models/district.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { MainFacilitySelectionComponent } from 'src/app/dialogs/main-facility-selection/main-facility-selection.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-update-hotel',
@@ -22,19 +25,27 @@ export class UpdateHotelComponent implements OnInit {
   neighborhoodList: ListNeighborhood[] = [];
   districtList: ListDistrict[] = [];
   filteredNeighborhoodList: ListNeighborhood[] = [];
+  translate: TranslateService;
 
   constructor(
     private hotelService: HotelService,
     private neighborhoodService: NeighborhoodService,
     private districtService: DistrictService,
     private sweetAlertService: SweetAlertService,
+    private dialogService: DialogService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    translate: TranslateService,
   ) {
+    this.translate = translate;
+    translate.addLangs(['en', 'tr']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang && browserLang.match(/en|tr/) ? browserLang : 'en');
     this.updateForm = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(4)]],
-      stars: [null, [Validators.required, Validators.min(1), Validators.max(5)]],
       address: [null, [Validators.required, Validators.minLength(10)]],
       description: [null, [Validators.required, Validators.maxLength(500)]],
       checkInTime: [null, [Validators.required]],
@@ -70,6 +81,13 @@ export class UpdateHotelComponent implements OnInit {
     } catch (error) {
       console.error('Error fetching hotel:', error);
     }
+  }
+
+  async showMainFacilitySelection() {
+    this.dialogService.openDialog({
+      componentType: MainFacilitySelectionComponent,
+      data: {}
+    });
   }
 
   async getDistrictIdByNeighborhoodId(neighborhoodId: number) {
@@ -125,7 +143,6 @@ export class UpdateHotelComponent implements OnInit {
       const updatedHotel: UpdateHotel = {
         id: this.hotel.id,
         name: formData.name,
-        stars: formData.stars,
         address: formData.address,
         description: formData.description,
         checkInTime: formData.checkInTime,
@@ -143,22 +160,21 @@ export class UpdateHotelComponent implements OnInit {
           console.error('Update hotel error:', error);
         }
       );
-    } else {
-      console.log('Form is invalid or hotel is null');
-      this.logValidationErrors(this.updateForm);
-    }
-  }
 
-  logValidationErrors(group: FormGroup): void {
-    Object.keys(group.controls).forEach((key: string) => {
-      const control = group.get(key);
-      if (control instanceof FormGroup) {
-        this.logValidationErrors(control);
-      } else {
-        if (control && control.invalid) {
-          console.log(`Validation error in field: ${key}, error:`, control.errors);
-        }
-      }
-    });
+
+      /*
+            logValidationErrors(group: FormGroup): void {
+              Object.keys(group.controls).forEach((key: string) => {
+                const control = group.get(key);
+                if (control instanceof FormGroup) {
+                  this.logValidationErrors(control);
+                } else {
+                  if (control && control.invalid) {
+                    console.log(`Validation error in field: ${key}, error:`, control.errors);
+                  }
+                }
+              }); 
+            } */
+    }
   }
 }

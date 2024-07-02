@@ -1,0 +1,7 @@
+<label>Şehir Seçimi</label>
+<select (change)="onSelectCity($event)">
+    <option selected>Seçiniz</option>
+    <option *ngFor="let city of listCities" [value]="city.id">
+        {{ city.name }}
+    </option>
+</select>

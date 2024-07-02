@@ -6,6 +6,7 @@ import { HttpStatusCode } from '@angular/common/http';
 import { UpdateHotel } from 'src/app/shared/models/hotels/update-hotel';
 import { ListHotelForStaff } from 'src/app/shared/models/hotels/list-hotel-for-staff';
 import { ListHotel } from 'src/app/shared/models/hotels/list-hotel';
+import { AddHotel } from 'src/app/shared/models/hotels/add-hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -66,8 +67,8 @@ export class HotelService {
       : response.statusMessage;
   } */
 
-  /*
-   async create(hotel: AddHotel, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+ 
+   async create(hotel: AddHotel, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
      const observable: Observable<AddHotel> = this.httpClientService.post({
        controller: 'hotels'
      }, hotel);
@@ -80,7 +81,7 @@ export class HotelService {
        .catch(errorResponse => {
          errorCallBack(errorResponse);
        });
-   } */
+   } 
 
   async update(hotel: UpdateHotel, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
     const observable: Observable<UpdateHotel> = this.httpClientService.put({

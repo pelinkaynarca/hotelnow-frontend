@@ -22,8 +22,9 @@ import { HttpStatusCode } from '@angular/common/http';
     }
 
     async getByCityId(id: number){
-      const observable:Observable<BaseResponse<ListDistrict>> = this.httpClientService.get({
-        controller: 'districts'
+      const observable:Observable<BaseResponse<ListDistrict[]>> = this.httpClientService.get({
+        controller: 'districts',
+        action: 'by-city-id'
       },id);
 
       const response = await firstValueFrom(observable);

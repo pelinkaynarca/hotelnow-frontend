@@ -50,6 +50,11 @@ const routes: Routes = [
         .then(m => m.DistrictModule)
       },
       {
+        path: 'managers',
+        loadChildren: () => import('./components/managers/manager-routing.module')
+        .then(m => m.ManagerRoutingModule)
+      },
+      {
         path: 'cities',
         loadChildren: () => import('./components/cities/city.module').then(m => m.CityModule)
       },

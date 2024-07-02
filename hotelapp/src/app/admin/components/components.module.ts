@@ -11,11 +11,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FacilityCategoryModule } from './facility-categories/facility-category.module';
 import { RoomTypeDetailCategoryModule } from './room-type-detail-categories/room-type-detail-category.module';
 import { MainFacilityOptionModule } from './main-facility-options/main-facility-option.module';
+import { ManagerModule } from './managers/manager.module';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    
+    DashboardComponent,    
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,8 @@ import { MainFacilityOptionModule } from './main-facility-options/main-facility-
     HotelModule,
     FacilityCategoryModule,
     RoomTypeDetailCategoryModule,
-    MainFacilityOptionModule
+    MainFacilityOptionModule,
+    ManagerModule
   ],
   exports:[
   ]

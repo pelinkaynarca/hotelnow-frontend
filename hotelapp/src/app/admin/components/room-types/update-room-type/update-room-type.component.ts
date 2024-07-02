@@ -37,7 +37,7 @@ export class UpdateRoomTypeComponent implements OnInit {
     this.updateForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       price: new FormControl(0, [Validators.required, Validators.max(300), Validators.min(1)]),
-      bedTypeId: new FormControl(null, selectValidator()),
+      bedTypeId: new FormControl('0', selectValidator()),
       viewTypeId: new FormControl(null, selectValidator()),
       size: new FormControl(0, [Validators.required, Validators.min(10)]),
       capacity: new FormControl(0, [Validators.required, Validators.max(300), Validators.min(1)]),
@@ -100,7 +100,7 @@ export class UpdateRoomTypeComponent implements OnInit {
         id: this.roomTypeId,
         name: formData.name,
         pricePerNight: formData.price,
-        bedTypeId: formData.badTypeId,
+        bedTypeId: formData.bedTypeId,
         viewTypeId: formData.viewTypeId,
         size: formData.size,
         capacity: formData.capacity,

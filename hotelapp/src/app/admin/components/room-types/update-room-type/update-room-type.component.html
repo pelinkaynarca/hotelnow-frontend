@@ -24,7 +24,6 @@
   
         <label>Oda Yatak Tipi</label>
         <select class="form-control create-select" formControlName="bedTypeId">
-          <option value="0" selected>Seçiniz</option>
           <option *ngFor="let bedType of listBedTypes" [value]="bedType.id">{{ bedType.name }}
           </option>
         </select>
@@ -36,7 +35,6 @@
   
         <label>Oda Manzara Tipi</label>
         <select class="form-control create-select" formControlName="viewTypeId">
-          <option value="0" selected>Seçiniz</option>
           <option *ngFor="let viewType of listViewTypes" [value]="viewType.id">{{ viewType.name }}
           </option>
         </select>

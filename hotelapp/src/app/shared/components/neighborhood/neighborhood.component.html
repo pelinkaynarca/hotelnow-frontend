@@ -1,0 +1,7 @@
+<label>Mahalle Seçimi</label>
+<select (change)="onSelectDistrict($event)">
+  <option selected>Seçiniz</option>
+    <option *ngFor="let neighborhood of listNeighborhoods" [value]="neighborhood.id">
+      {{ neighborhood.name }}
+    </option>
+  </select>

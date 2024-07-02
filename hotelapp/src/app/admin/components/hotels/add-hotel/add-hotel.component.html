@@ -1,0 +1,30 @@
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="gap-4 grid grid-cols-1 lg:grid-cols-2 mb-4">
+    <div class="form-group">
+        <label for="name" class="font-bold">Otel Adı</label>
+        <input type="text" class="form-control" formControlName="name">
+        <div *ngIf="createForm.get('name')?.touched && createForm.get('name')?.invalid" class="text-danger">
+            Otel adı zorunludur ve en az 4 karakter uzunluğunda olmalıdır.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="neighborhoodId" class="font-bold">Otel Yıldızı</label>
+        <select class="form-control" formControlName="stars">
+            <option value="0" selected>Seçiniz</option>
+            <option value="1">1 Yıldızlı Otel</option>
+            <option value="2">2 Yıldızlı Otel</option>
+            <option value="3">3 Yıldızlı Otel</option>
+            <option value="4">4 Yıldızlı Otel</option>
+            <option value="5">5 Yıldızlı Otel</option>
+        </select>
+        <div *ngIf="isValid('stars')" class="text-danger">
+            <small>
+                {{ createForm.get('stars').getError('categorySelected') }}
+            </small>
+        </div>
+    </div>
+
+    <div class="create-button">
+        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Otel Ekle</button>
+    </div>
+</form>

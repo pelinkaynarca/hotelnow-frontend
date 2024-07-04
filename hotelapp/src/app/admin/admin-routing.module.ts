@@ -6,6 +6,7 @@ import { RoomTypeRoutingModule } from './components/room-types/room-type-routing
 import { StaffRoutingModule } from './components/staffs/staff-routing.module';
 import { AuthGuard } from '../guards/auth.guard';
 import { RoleGuard } from '../guards/role.guard';
+import { BookingRoutingModule } from './components/bookings/booking-routing.module';
 
 const routes: Routes = [
   {
@@ -72,7 +73,12 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['ADMIN'] }
       },
-     
+      {
+        path: 'bookings',
+        loadChildren: () => import('./components/bookings/booking-routing.module').then(m => m.BookingRoutingModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['MANAGER'] }
+      },
     ]
   },
   {
@@ -83,7 +89,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), RoomTypeRoutingModule, StaffRoutingModule],
+  imports: [RouterModule.forRoot(routes), RoomTypeRoutingModule, StaffRoutingModule, BookingRoutingModule],
   exports: [RouterModule]
 })
 export class AdminRoutingModule {

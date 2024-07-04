@@ -119,6 +119,17 @@
                 <span class="mx-4 font-medium">Personel</span>
             </a>
 
+            <a class="flex items-center px-3 py-2 h-14 text-primary-white transition-colors duration-300 transform rounded-full hover:bg-gradient-r-sb-link-hover cursor-pointer"
+              (click)="isBookingsCollapsed = !isBookingsCollapsed" [attr.aria-expanded]="!isBookingsCollapsed"  *ngIf="isManager()">
+              <i class="fa-solid fa-list"></i>
+              <span class="mx-4 font-medium">Rezervasyonlar</span>
+            </a>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isBookingsCollapsed">
+                <a [routerLink]="['bookings/pending-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Bekleyenler</a>
+                <a [routerLink]="['bookings/approved-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Onaylananlar</a>
+                <a [routerLink]="['bookings/cancelled-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">İptal Edilenler</a>
+            </div>
+
             <hr class="my-6 border-gray-600" />
 
             <a class="flex items-center px-3 py-2 h-14 text-primary-white transition-colors duration-300 transform rounded-full hover:bg-gradient-r-sb-link-hover"

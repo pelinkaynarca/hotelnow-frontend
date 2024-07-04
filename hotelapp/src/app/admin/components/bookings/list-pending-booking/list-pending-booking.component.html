@@ -1,0 +1,31 @@
+<!-- <div class="container"> -->
+  <div class="table-wrapper">
+    <table class="lg-table">
+      <thead>
+        <tr>
+          <th>Müşteri Adı</th>
+          <th>Müşteri Soyadı</th>
+          <th>Müşteri Tel No</th>
+          <th>Müşteri E-Posta</th>
+          <th>Giriş Tarihi</th>
+          <th>Çıkış Tarihi</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of pendingBookings">
+          <td>{{ booking.customer.firstName}}</td>
+          <td>{{ booking.customer.lastName }}</td>
+          <td>{{ booking.customer.phone }}</td>
+          <td>{{ booking.customer.email }}</td>
+          <td>{{ booking.checkInDate }}</td>
+          <td>{{ booking.checkOutDate }}</td>
+          <td>
+            <i class="fa-solid fa-lg fa-circle-check" title="Onayla" (click)="approve(booking.id)"></i>
+            <i class="fa-solid fa-lg fa-ban" title="İptal Et" (click)="cancel(booking.id)"></i>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+<!-- </div> -->

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
+  sidebarOpen: boolean = false;
 
+  onToggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 }

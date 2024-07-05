@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         'primary-blue': '#4BA7B7',
-        'primary-blue-hover': 'rgba(50, 153, 171, 0.15)',
+        'primary-blue-light': 'rgba(50, 153, 171, 0.04)',
+        'primary-blue-dark': 'rgb(51, 153, 171)',
         'primary-white': '#FBFFF4',
         'accent-dark': '#292F36',
       },
@@ -27,7 +28,7 @@ module.exports = {
       },
       linearGradientColors: { // defaults to {}
         'sb-link-active': ['#4BA7B7 25%', '#292F36 90%'],
-        'sb-link-hover': ['rgb(76, 95, 99, 0.7) 25%', '#292F36 90%'],
+        'sb-link-hover': ['rgb(76, 95, 99, 0.7) 25%', '#292F36 90%']
       },
     },
   },

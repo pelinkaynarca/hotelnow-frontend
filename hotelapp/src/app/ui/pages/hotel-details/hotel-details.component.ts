@@ -28,7 +28,7 @@ export class HotelDetailsComponent implements OnInit {
   
     async getHotelDetails(id: number) {
       this.hotel = await this.hotelService.getById(id) as ListHotel;
-      this.hotel.mainFacilitySelection = await this.selectionService.getRandomByHotelId(this.hotel.id) as ListMainFacilitySelection[];
+      this.hotel.mainFacilitySelections = await this.selectionService.getRandomByHotelId(this.hotel.id) as ListMainFacilitySelection[];
       }
 
     goBack(): void {

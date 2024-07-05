@@ -14,7 +14,7 @@ import { HotelSearchComponent } from './hotel-search/hotel-search.component';
     RegisterComponent,
     LoginComponent,
     HotelDetailsComponent,
-    HotelSearchComponent,
+    HotelSearchComponent
   ],
   imports: [
     CommonModule,

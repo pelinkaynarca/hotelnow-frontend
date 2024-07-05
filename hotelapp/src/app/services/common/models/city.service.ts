@@ -21,7 +21,7 @@ export class CityService {
       : response.statusMessage;
   }
 
-  async getByCityId(id: number){
+  async getById(id: number){
     const observable:Observable<BaseResponse<ListCity>> = this.httpClientService.get({
       controller: 'cities'
     },id);

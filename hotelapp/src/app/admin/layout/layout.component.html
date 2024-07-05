@@ -1,9 +1,15 @@
-<div class="wrapper h-screen flex flex-row">
-  <app-sidebar class="w-72 fixed left-0 h-full z-10"></app-sidebar>
+<div class="wrapper h-screen w-full flex flex-row">
+  <!-- Sidebar -->
+  <app-sidebar class="" [sidebarOpen]="sidebarOpen"></app-sidebar>
+
+  <!-- Main content area -->
   <div class="flex flex-col w-full">
-    <app-header class="h-16 fixed w-full"></app-header>
-    <div class="content flex-1 p-20 ml-72 overflow-y-auto"><router-outlet></router-outlet></div>
+    <!-- Header -->
+    <app-header (toggleSidebar)="onToggleSidebar()" [class.pl-72]="!sidebarOpen" [class.pl-0]="sidebarOpen" class="transition-padding"></app-header>
+    
+    <!-- Content area -->
+    <div class="content pr-20 py-20 flex-1 w-full overflow-y-auto transition-padding" [class.pl-96]="!sidebarOpen" [class.pl-20]="sidebarOpen">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-
-<!-- <app-footer class="bg-white border-t border-gray-200 dark:bg-gray-900"></app-footer> -->

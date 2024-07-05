@@ -1,7 +1,7 @@
-<aside class="flex flex-col w-full h-full px-4 py-8 bg-accent-dark">
+<aside class="flex flex-col px-4 py-8 bg-accent-dark transition-transform duration-300 transform w-72 fixed h-full z-10" [class.translate-x-0]="!sidebarOpen" [class.-translate-x-full]="sidebarOpen" [class.absolute]="sidebarOpen">
     <a [routerLink]="['/admin']">
         <span class="flex flex-row text-4xl font-semibold text-primary-blue items-center">Hotel<b
-                class="flex flex-row">N <img class="w-auto h-10" src="../../../../../assets/img/logo-clock.png"
+                class="flex flex-row">N <img class="w-auto h-10 pt-1" src="../../../../../assets/img/logo-clock.png"
                     alt="">w</b>
         </span>
     </a>
@@ -19,7 +19,7 @@
             placeholder="Search" />
     </div>
 
-    <div class="flex flex-col justify-between flex-1 mt-6 text-lg h-full">
+    <div class="flex flex-col justify-between flex-1 mt-6 text-lg h-full overflow-y-auto">
         <nav class="flex flex-col gap-2 overflow-y-auto h-full">
             <a class="flex items-center px-3 py-2 h-14 text-primary-white hover:bg-gradient-r-sb-link-hover rounded-full"
                 [routerLink]="['/admin']" routerLinkActive="bg-gradient-r-sb-link-active"

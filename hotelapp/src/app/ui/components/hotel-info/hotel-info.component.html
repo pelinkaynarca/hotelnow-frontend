@@ -33,7 +33,7 @@
           <p class="pb-2">{{ hotel.description }}</p>
           <h3 class="text-lg font-bold pb-1">Some of the main facilities</h3>
           <ul class="list-disc list-inside flex flex-row flex-wrap gap-3">
-            <li *ngFor="let facility of hotel.mainFacilitySelection">
+            <li *ngFor="let facility of hotel.mainFacilitySelections">
               {{ facility.optionTitle }}
             </li>
           </ul>

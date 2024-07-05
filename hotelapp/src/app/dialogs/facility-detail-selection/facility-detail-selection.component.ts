@@ -20,6 +20,7 @@ import { ListFacilityDetailSelection } from 'src/app/shared/models/facility-deta
 export class FacilityDetailSelectionComponent implements OnInit {
   @ViewChild("selectionForm", { static: true }) selectionForm!: NgForm;
   @Input() data!: { hotelId: number };
+  hotelId!: number;
   facilityDetailSelections: FacilityDetailSelection[] = [];
   facilityCategories: ListFacilityCategory[];
 
@@ -31,7 +32,7 @@ export class FacilityDetailSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllOptions();
-    this.getByHotelForStaff();
+    this.getByHotelId(this.data.hotelId);
   }
 
   async getAllOptions() {
@@ -39,12 +40,20 @@ export class FacilityDetailSelectionComponent implements OnInit {
     this.facilityCategories = data;
   }
 
-  async getByHotelForStaff() {
+  /* async getByHotelForStaff() {
     if (this.data && this.data.hotelId) {
       const listDetails = await this.selectionService.getFacilityDetailSelenctionStaff() as ListFacilityDetailSelection[];
       this.facilityDetailSelections = listDetails.flatMap(detail => detail.facilityDetailSelection);
     }
-  }
+  } */
+
+  async getByHotelId(hotelId: number) {
+    if (this.data && this.data.hotelId) {
+      this.hotelId = this.data.hotelId;
+      const listDetails = await this.selectionService.getByHotelId(this.data.hotelId) as ListFacilityDetailSelection[];
+      this.facilityDetailSelections = listDetails.flatMap(detail => detail.facilityDetailSelection);
+    }
+  } 
 
   async onSubmit() {
     const addOrUpdateSelections: AddFacilityDetailSelection[] = [];

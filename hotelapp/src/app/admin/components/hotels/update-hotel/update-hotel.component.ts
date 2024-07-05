@@ -13,6 +13,10 @@ import { DistrictService } from 'src/app/services/common/models/district.service
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { MainFacilitySelectionComponent } from 'src/app/dialogs/main-facility-selection/main-facility-selection.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ListCity } from 'src/app/shared/models/cities/list-city';
+import { CityService } from 'src/app/services/common/models/city.service';
+import { FacilityDetailSelectionComponent } from 'src/app/dialogs/facility-detail-selection/facility-detail-selection.component';
+import { HotelImageComponent } from 'src/app/dialogs/hotel-image/hotel-image.component';
 
 @Component({
   selector: 'app-update-hotel',
@@ -22,15 +26,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class UpdateHotelComponent implements OnInit {
   updateForm: FormGroup;
   hotel: ListHotelForStaff | null = null;
-  neighborhoodList: ListNeighborhood[] = [];
+  cityList: ListCity[] = [];
   districtList: ListDistrict[] = [];
-  filteredNeighborhoodList: ListNeighborhood[] = [];
+  neighborhoodList: ListNeighborhood[] = [];
   translate: TranslateService;
 
   constructor(
     private hotelService: HotelService,
     private neighborhoodService: NeighborhoodService,
     private districtService: DistrictService,
+    private cityService: CityService,
     private sweetAlertService: SweetAlertService,
     private dialogService: DialogService,
     private fb: FormBuilder,
@@ -47,66 +52,71 @@ export class UpdateHotelComponent implements OnInit {
     this.updateForm = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(4)]],
       address: [null, [Validators.required, Validators.minLength(10)]],
-      description: [null, [Validators.required, Validators.maxLength(500)]],
+      description: [null, [Validators.required, Validators.maxLength(800)]],
       checkInTime: [null, [Validators.required]],
       checkOutTime: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
       districtId: [null, [Validators.required]],
-      neighborhoodId: [null, [Validators.required, Validators.min(1)]]
+      neighborhoodId: [null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.getHotel();
-    this.getDistrictList();
+    this.getCityList();
   }
 
   async getHotel() {
+    const result = await this.hotelService.getHotel();
+    if (typeof result === 'string') {
+      console.error('Error fetching hotel:', result);
+    } else {
+      this.hotel = result;
+      this.updateForm.patchValue({
+        name: result.name,
+        stars: result.stars,
+        address: result.address,
+        description: result.description,
+        checkInTime: result.checkInTime,
+        checkOutTime: result.checkOutTime,
+        neighborhoodId: +result.neighborhoodId
+      });
+      this.setLocationByNeighborhood(result.neighborhoodId);
+    }
+  }
+
+  async setLocationByNeighborhood(neighborhoodId: number) {
     try {
-      const result = await this.hotelService.getHotel();
+      const neighborhood = await this.neighborhoodService.getById(neighborhoodId) as ListNeighborhood;
+      const district = await this.districtService.getById(neighborhood.districtId) as ListDistrict;
+      const city = await this.cityService.getById(district.cityId) as ListCity;
+      this.updateForm.patchValue({
+        cityId: city.id,
+        districtId: district.id
+      });
+      this.getDistrictList(city.id);
+      this.getNeighborhoodList(district.id);
+    } catch (error) {
+      console.error('Error fetching location data:', error);
+    }
+  }
+
+  async getCityList() {
+    try {
+      const result = await this.cityService.getAll();
       if (typeof result === 'string') {
-        console.error('Error fetching hotel:', result);
+        console.error('Error fetching cities:', result);
       } else {
-        this.hotel = result;
-        this.updateForm.patchValue({
-          name: result.name,
-          stars: result.stars,
-          address: result.address,
-          description: result.description,
-          checkInTime: result.checkInTime,
-          checkOutTime: result.checkOutTime,
-          neighborhoodId: +result.neighborhoodId
-        });
-        this.getDistrictIdByNeighborhoodId(result.neighborhoodId);
+        this.cityList = result;
       }
     } catch (error) {
-      console.error('Error fetching hotel:', error);
+      console.error('Error fetching cities:', error);
     }
   }
 
-  async showMainFacilitySelection() {
-    this.dialogService.openDialog({
-      componentType: MainFacilitySelectionComponent,
-      data: {}
-    });
-  }
-
-  async getDistrictIdByNeighborhoodId(neighborhoodId: number) {
+  async getDistrictList(cityId: number) {
     try {
-      const neighborhood = await this.neighborhoodService.getById(neighborhoodId);
-      if (neighborhood && typeof neighborhood !== 'string') {
-        this.updateForm.patchValue({ districtId: neighborhood.districtId });
-        this.getNeighborhoodList(neighborhood.districtId);
-      } else {
-        console.error('Error fetching districtId for neighborhoodId:', neighborhoodId);
-      }
-    } catch (error) {
-      console.error('Error fetching districtId by neighborhoodId:', error);
-    }
-  }
-
-  async getDistrictList() {
-    try {
-      const result = await this.districtService.getAll();
+      const result = await this.districtService.getByCityId(cityId);
       if (typeof result === 'string') {
         console.error('Error fetching districts:', result);
       } else {
@@ -124,11 +134,16 @@ export class UpdateHotelComponent implements OnInit {
         console.error('Error fetching neighborhoods:', result);
       } else {
         this.neighborhoodList = result;
-        this.filteredNeighborhoodList = result;
       }
     } catch (error) {
       console.error('Error fetching neighborhoods:', error);
     }
+  }
+
+  onCityChange(event: any) {
+    const selectedCityId = event.target.value;
+    this.getDistrictList(selectedCityId);
+    this.updateForm.patchValue({ districtId: null, neighborhoodId: null });
   }
 
   onDistrictChange(event: any) {
@@ -138,6 +153,11 @@ export class UpdateHotelComponent implements OnInit {
   }
 
   update() {
+    console.log('Update button clicked');
+    console.log('Form Valid:', this.updateForm.valid);
+    console.log('Form Value:', this.updateForm.value);
+
+    this.logValidationErrors(this.updateForm);
     if (this.updateForm.valid && this.hotel) {
       const formData = this.updateForm.value;
       const updatedHotel: UpdateHotel = {
@@ -160,21 +180,41 @@ export class UpdateHotelComponent implements OnInit {
           console.error('Update hotel error:', error);
         }
       );
-
-
-      /*
-            logValidationErrors(group: FormGroup): void {
-              Object.keys(group.controls).forEach((key: string) => {
-                const control = group.get(key);
-                if (control instanceof FormGroup) {
-                  this.logValidationErrors(control);
-                } else {
-                  if (control && control.invalid) {
-                    console.log(`Validation error in field: ${key}, error:`, control.errors);
-                  }
-                }
-              }); 
-            } */
     }
   }
+
+  logValidationErrors(group: FormGroup): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      const control = group.get(key);
+      if (control instanceof FormGroup) {
+        this.logValidationErrors(control);
+      } else {
+        if (control && control.invalid) {
+          console.log(`Validation error in field: ${key}, error:`, control.errors);
+        }
+      }
+    });
+  }
+
+  async showMainFacilitySelection() {
+    this.dialogService.openDialog({
+      componentType: MainFacilitySelectionComponent,
+      data: {}
+    });
+  }
+
+  async showFacilityDetailSelection(hotelId: number) {
+    this.dialogService.openDialog({
+      componentType: FacilityDetailSelectionComponent,
+      data: { hotelId }
+    });
+  }
+
+  async showPhotos(hotelId: number) {
+    this.dialogService.openDialog({
+      componentType: HotelImageComponent,
+      data: { hotelId },
+    });
+  }
+
 }

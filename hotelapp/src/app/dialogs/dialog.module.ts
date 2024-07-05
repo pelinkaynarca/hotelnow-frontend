@@ -9,6 +9,7 @@ import { FacilityDetailSelectionComponent } from './facility-detail-selection/fa
 import { MainFacilitySelectionComponent } from './main-facility-selection/main-facility-selection.component';
 import { LanguageComponent } from './language/language.component';
 import { CurrencyComponent } from './currency/currency.component';
+import { HotelImageComponent } from './hotel-image/hotel-image.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { CurrencyComponent } from './currency/currency.component';
     FacilityDetailSelectionComponent,
     MainFacilitySelectionComponent,
     LanguageComponent,
-    CurrencyComponent
+    CurrencyComponent,
+    HotelImageComponent
   ],
     imports:[
       ReactiveFormsModule,

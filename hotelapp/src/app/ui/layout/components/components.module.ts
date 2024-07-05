@@ -11,7 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,

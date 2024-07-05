@@ -1,4 +1,5 @@
 import { ListMainFacilitySelection } from "../main-facility-selections/list-main-facility-selection";
+import { ListImage } from "../images/list-image";
 
 export class ListHotel {
     id: number;
@@ -10,10 +11,10 @@ export class ListHotel {
     checkInTime: string;
     checkOutTime: string;
     neighborhoodName: string;
-    mainFacilitySelection: ListMainFacilitySelection[];
+    mainFacilitySelections: ListMainFacilitySelection[];
     //facilityDetailSelection: ListFacilityDetailSelection[];
     //hotelPhone?: ListHotelPhone[];
-    //hotelImage?: ListImage[];
+    hotelImages: ListImage[];
     //roomType: ListRoomType[];
     //review: ListReview[];
 }

@@ -29,7 +29,7 @@ export class ListAllHotelsComponent implements OnInit {
     this.listHotels = hotelData as ListHotel[];
 
     for (const hotel of this.listHotels) {
-      hotel.mainFacilitySelection = await this.selectionService.getRandomByHotelId(hotel.id) as ListMainFacilitySelection[];
+      hotel.mainFacilitySelections = await this.selectionService.getRandomByHotelId(hotel.id) as ListMainFacilitySelection[];
     }
 
     /* this.filteredHotels = [...this.listHotels]; */

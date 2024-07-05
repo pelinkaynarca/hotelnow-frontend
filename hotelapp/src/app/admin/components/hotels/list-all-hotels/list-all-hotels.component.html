@@ -40,9 +40,9 @@
                 </svg>
             </div>
             <p class="text-sm pb-1">{{ hotel.neighborhoodName }}</p>
-            <div *ngIf="hotel.mainFacilitySelection && hotel.mainFacilitySelection.length > 0">
+            <div>
                 <ul class="list-disc list-inside flex-wrap text-sm font-semibold flex flex-row gap-3">
-                    <li *ngFor="let selection of hotel.mainFacilitySelection">
+                    <li *ngFor="let selection of hotel.mainFacilitySelections">
                         {{ selection.optionTitle }}
                     </li>
                 </ul>

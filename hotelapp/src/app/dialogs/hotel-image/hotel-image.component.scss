@@ -1,0 +1,103 @@
+.modal-body {
+    max-height: 80vh; 
+    overflow-y: auto; 
+  }
+
+.upload-container {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    padding: 2rem;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    margin-bottom: 2rem;
+}
+
+.upload-icon img {
+    width: 80px;
+    height: 80px;
+    margin-top: 2rem;
+}
+
+.upload-content {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.upload-message {
+    font-weight: 700;
+}
+
+.label {
+    font-size: 20px;
+}
+
+.upload-submit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.image-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.image-preview img {
+    width: 250px;
+    height: 200px;
+}
+
+.table {
+    margin: 0 auto;
+    width: max-content;
+    margin-bottom: 2rem;
+}
+
+thead, tbody {
+    text-align: center;
+}
+
+td {
+    vertical-align: middle;
+    padding: 10px 20px;
+}
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.images {
+    border: 1px solid #ccc;
+    padding: 10px 10px 0 10px;
+    text-align: center;
+    position: relative;
+}
+
+.images img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+p {
+    margin-top: 10px;
+}
+
+.images i {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    cursor: pointer;
+}

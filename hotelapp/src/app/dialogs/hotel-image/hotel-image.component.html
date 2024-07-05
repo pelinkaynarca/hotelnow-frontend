@@ -1,0 +1,63 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Oda Tipinin Fotoğraf İşlemleri</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="upload-container">
+            <form #photoForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="upload-area border-primary-blue border-2 border-dashed" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                    (drop)="onDrop($event)">
+                    <div class="upload-icon">
+                        <img src="assets/img/admin/upload-img.png" alt="Upload Icon">
+                    </div>
+                    <div class="upload-content">
+                        <ng-container *ngIf="selectedFiles.length > 0; else noPhotos">
+                            <h3 class="upload-message">{{ selectedFiles.length }} Fotoğraf Eklendi</h3>
+                        </ng-container>
+                        <ng-template #noPhotos>
+                            <h3 class="upload-message">Bir dosyayı sürükleyip bırakın</h3>
+                        </ng-template>
+                        <p class="label pb-3"> veya
+                            <span class="upload-files">
+                                <input type="file" (change)="onFileSelected($event)" multiple accept="image/*" required
+                                    id="fileInput" style="display: none;">
+                                <label for="fileInput" class="upload-files-text font-bold text-primary-blue cursor-pointer">dosya seçin</label>
+                            </span>
+                        </p>
+                        <button class="upload-button bg-primary-blue text-primary-white rounded-lg p-2 w-16 text-lg" type="submit">Yükle</button>
+                    </div>
+                </div>
+            </form>
+            <div class="image-files" *ngIf="selectedFiles.length > 0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Boyut</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let image of selectedFiles; let i = index">
+                            <td>{{ image.name | limitTo:24 | titlecase }}</td>
+                            <td>{{ image.size / 1024 / 1024 | number:'.2' }} MB</td>
+                            <td>
+                                <button type="button" class="btn btn-dark btn-xs" (click)="removeImage(i)">
+                                    <i class="fa-solid fa-trash"></i> Kaldır
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-preview" *ngFor="let item of listImages">
+                <div class="images" *ngFor="let photo of item.photos">
+                    <img [src]="photo.path">
+                    <p>{{photo.imageName | limitTo:24 | titlecase}}</p>
+                    <i class="fa-solid fa-xmark fa-xl" (click)="deletePhoto(photo.id)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

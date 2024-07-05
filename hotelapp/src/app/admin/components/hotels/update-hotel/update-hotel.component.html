@@ -1,96 +1,130 @@
-<div class="flex flex-col mb-10">
-    <p class="text-3xl font-bold">OTEL BİLGİLERİ</p>
-    <p class="text-base">Otel bilgilerinizi kolayca güncelleyin.</p>
+<div class="">
+    <div class="flex flex-col mb-10">
+        <p class="text-3xl font-extrabold">OTEL BİLGİLERİ</p>
+        <p class="text-base">Otel bilgilerinizi kolayca güncelleyin.</p>
+    </div>
+
+    <div class="mb-14">
+        <p class="text-xl font-extrabold pb-4">TEMEL BİLGİLER</p>
+
+        <form [formGroup]="updateForm" (ngSubmit)="update()"
+            class="gap-4 flex flex-col md:grid md:grid-cols-2 md:grid-rows-4 mb-4">
+
+            <div class="form-group">
+                <label for="name" class="font-semibold">Otel Adı</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <div *ngIf="updateForm.get('name')?.touched && updateForm.get('name')?.invalid" class="text-danger">
+                    Otel adı zorunludur ve en az 4 karakter uzunluğunda olmalıdır.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="checkInTime" class="font-bold">Giriş Saati</label>
+                <input type="time" class="form-control" id="checkInTime" formControlName="checkInTime">
+                <div *ngIf="updateForm.get('checkInTime')?.touched && updateForm.get('checkInTime')?.invalid"
+                    class="text-danger">
+                    Giriş saati zorunludur.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="font-bold">Açıklama</label>
+                <textarea class="form-control resize-none" id="description" formControlName="description"></textarea>
+                <div *ngIf="updateForm.get('description')?.touched && updateForm.get('description')?.invalid"
+                    class="text-danger">
+                    Açıklama zorunludur ve en fazla 500 karakter olmalıdır.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="checkOutTime" class="font-bold">Çıkış Saati</label>
+                <input type="time" class="form-control" id="checkOutTime" formControlName="checkOutTime">
+                <div *ngIf="updateForm.get('checkOutTime')?.touched && updateForm.get('checkOutTime')?.invalid"
+                    class="text-danger">
+                    Çıkış saati zorunludur.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address" class="font-bold">Açık Adres</label>
+                <textarea class="form-control" id="address" formControlName="address"></textarea>
+                <div *ngIf="updateForm.get('address')?.touched && updateForm.get('address')?.invalid"
+                    class="text-danger">
+                    Adres zorunludur ve en az 10 karakter uzunluğunda olmalıdır.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city" class="font-bold">Şehir</label>
+                <select id="city" class="form-control" formControlName="cityId" (change)="onCityChange($event)">
+                    <option value="">{{ 'Şehir Seçiniz' }}</option>
+                    <option *ngFor="let city of cityList" [value]="city.id">{{ city.name }}</option>
+                </select>
+                <div *ngIf="updateForm.get('cityId')?.touched && updateForm.get('cityId')?.invalid" class="text-danger">
+                    Şehir seçimi zorunludur.
+                </div>
+            </div>
+
+            <div class="form-group" *ngIf="neighborhoodList.length > 0">
+                <label for="neighborhood" class="font-bold">Mahalle</label>
+                <select id="neighborhood" class="form-control" formControlName="neighborhoodId">
+                    <option value="">{{ 'Mahalle Seçiniz' }}</option>
+                    <option *ngFor="let neighborhood of neighborhoodList" [value]="neighborhood.id">{{ neighborhood.name
+                        }}
+                    </option>
+                </select>
+                <div *ngIf="updateForm.get('neighborhoodId')?.touched && updateForm.get('neighborhoodId')?.invalid"
+                    class="text-danger">
+                    Mahalle seçimi zorunludur.
+                </div>
+            </div>
+
+
+            <div class="form-group" *ngIf="districtList.length > 0">
+                <label for="district" class="font-bold">İlçe</label>
+                <select id="district" class="form-control" formControlName="districtId"
+                    (change)="onDistrictChange($event)">
+                    <option value="">{{ 'İlçe Seçiniz' }}</option>
+                    <option *ngFor="let district of districtList" [value]="district.id">{{ district.name }}</option>
+                </select>
+                <div *ngIf="updateForm.get('districtId')?.touched && updateForm.get('districtId')?.invalid"
+                    class="text-danger">
+                    İlçe seçimi zorunludur.
+                </div>
+            </div>
+
+            <div class="flex justify-end col-span-2">
+                <button type="submit"
+                    class="bg-primary-blue hover:bg-primary-blue-hover rounded-lg w-40 h-12 text-lg font-semibold text-primary-white">
+                    Güncelle
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-
-<form [formGroup]="updateForm" (ngSubmit)="update()" class="gap-4 grid grid-cols-1 lg:grid-cols-2 mb-4">
-
-    <div class="form-group">
-        <label for="name" class="font-bold">Otel Adı</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-        <div *ngIf="updateForm.get('name')?.touched && updateForm.get('name')?.invalid" class="text-danger">
-            Otel adı zorunludur ve en az 4 karakter uzunluğunda olmalıdır.
-        </div>
-    </div>
-
-    <!-- <div class="form-group">
-        <label for="stars" class="font-bold">Yıldız</label>
-        <input type="number" class="form-control" id="stars" formControlName="stars" min="1" max="5">
-        <div *ngIf="updateForm.get('stars')?.touched && updateForm.get('stars')?.invalid" class="text-danger">
-            Yıldız zorunludur ve 1 ile 5 arasında bir sayı olmalıdır.
-        </div>
-    </div> -->
-
-    <div class="form-group">
-        <label for="description" class="font-bold">Açıklama</label>
-        <textarea class="form-control" id="description" formControlName="description"></textarea>
-        <div *ngIf="updateForm.get('description')?.touched && updateForm.get('description')?.invalid"
-            class="text-danger">
-            Açıklama zorunludur ve en fazla 500 karakter olmalıdır.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="address" class="font-bold">Açık Adres</label>
-        <textarea class="form-control" id="address" formControlName="address"></textarea>
-        <div *ngIf="updateForm.get('address')?.touched && updateForm.get('address')?.invalid" class="text-danger">
-            Adres zorunludur ve en az 10 karakter uzunluğunda olmalıdır.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="checkInTime" class="font-bold">Giriş Saati</label>
-        <input type="time" class="form-control" id="checkInTime" formControlName="checkInTime">
-        <div *ngIf="updateForm.get('checkInTime')?.touched && updateForm.get('checkInTime')?.invalid"
-            class="text-danger">
-            Giriş saati zorunludur.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="districtId" class="font-bold">İlçe</label>
-        <select class="form-control" id="districtId" formControlName="districtId" (change)="onDistrictChange($event)">
-            <option *ngFor="let district of districtList" [value]="district.id">
-                {{ district.name }}
-            </option>
-        </select>
-        <div *ngIf="updateForm.get('districtId')?.touched && updateForm.get('districtId')?.invalid" class="text-danger">
-            İlçe seçimi zorunludur.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="checkOutTime" class="font-bold">Çıkış Saati</label>
-        <input type="time" class="form-control" id="checkOutTime" formControlName="checkOutTime">
-        <div *ngIf="updateForm.get('checkOutTime')?.touched && updateForm.get('checkOutTime')?.invalid"
-            class="text-danger">
-            Çıkış saati zorunludur.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="neighborhoodId" class="font-bold">Mahalle</label>
-        <select class="form-control" id="neighborhoodId" formControlName="neighborhoodId">
-            <option *ngFor="let neighborhood of filteredNeighborhoodList" [value]="neighborhood.id">
-                {{ neighborhood.name }}
-            </option>
-        </select>
-        <div *ngIf="updateForm.get('neighborhoodId')?.touched && updateForm.get('neighborhoodId')?.invalid"
-            class="text-danger">
-            Mahalle seçimi zorunludur.
-        </div>
-    </div>
-
-    <div class="flex justify-end col-span-2">
-        <button type="submit"
-            class="bg-primary-blue hover:bg-primary-blue-hover rounded-lg w-40 h-12 text-lg font-semibold text-primary-white">
-            Güncelle
-        </button>
-    </div>
-</form>
-
-<div class="w-full">
-    <p class="text-3xl font-bold">OTEL İŞLEMLERİ</p>
-    <i class="fa-solid fa-clipboard-check" (click)="showMainFacilitySelection()"></i>
-
+<div class="table-wrapper">
+    <p class="text-xl font-extrabold pb-4">OTEL İŞLEMLERİ</p>
+    <table class="lg-table">
+        <thead>
+            <tr>
+                <th>Fotoğraf İşlemleri</th>
+                <th>Temel Otel Özellikleri</th>
+                <th>Detay Otel Özellikleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i class="fa-solid fa-image fa-lg p-3" (click)="showPhotos(this.hotel.id)"></i>
+                </td>
+                <td>
+                    <i class="fa-solid fa-clipboard-check fa-lg p-3" (click)="showMainFacilitySelection()"></i>
+                </td>
+                <td>
+                    <i class="fa-solid fa-clipboard-check fa-lg p-3"
+                        (click)="showFacilityDetailSelection(this.hotel.id)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

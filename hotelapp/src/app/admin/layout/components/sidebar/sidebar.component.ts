@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/common/auth.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/services/common/auth.service';
 })
 export class SidebarComponent implements OnInit{
   isBookingsCollapsed = true;
+  @Input() sidebarOpen: boolean;
+  @Output() toggleSidebar: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public router: Router, private authService: AuthService) {}
 
@@ -16,6 +19,10 @@ export class SidebarComponent implements OnInit{
     if (this.router.url.startsWith('/admin/bookings')) {
       this.isBookingsCollapsed = false;
     }
+  }
+
+  onToggleSidebar(): void {
+    this.toggleSidebar.emit();
   }
 
   isAdmin(): boolean {

@@ -108,7 +108,7 @@
             </a>
 
             <a class="flex items-center px-3 py-2 h-14 text-primary-white transition-colors duration-300 transform rounded-full hover:bg-gradient-r-sb-link-hover"
-                [routerLink]="['staffs']" *ngIf="isManager()">
+                [routerLink]="['staffs']" *ngIf="isManager()" routerLinkActive="bg-gradient-r-sb-link-active">
                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
@@ -125,9 +125,9 @@
               <span class="mx-4 font-medium">Rezervasyonlar</span>
             </a>
             <div #collapse="ngbCollapse" [(ngbCollapse)]="isBookingsCollapsed">
-                <a [routerLink]="['bookings/pending-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Bekleyenler</a>
-                <a [routerLink]="['bookings/approved-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Onaylananlar</a>
-                <a [routerLink]="['bookings/cancelled-list']" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">İptal Edilenler</a>
+                <a [routerLink]="['bookings/pending-list']" routerLinkActive="bg-gradient-r-sb-link-active" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Bekleyenler</a>
+                <a [routerLink]="['bookings/approved-list']" routerLinkActive="bg-gradient-r-sb-link-active" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">Onaylananlar</a>
+                <a [routerLink]="['bookings/cancelled-list']" routerLinkActive="bg-gradient-r-sb-link-active" class="px-3 py-2 h-10 text-primary-white rounded-full hover:bg-gradient-r-sb-link-hover block visible cursor-pointer ml-2">İptal Edilenler</a>
             </div>
 
             <hr class="my-6 border-gray-600" />

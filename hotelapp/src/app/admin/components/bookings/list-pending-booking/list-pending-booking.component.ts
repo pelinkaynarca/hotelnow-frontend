@@ -17,7 +17,7 @@ export class ListPendingBookingComponent implements OnInit {
 
   pendingBookings: ListBooking[];
 
-  constructor(private bookingService: BookingService,private router: Router,private sweetAlertService: SweetAlertService) { }
+  constructor(private bookingService: BookingService, private router: Router, private sweetAlertService: SweetAlertService) { }
 
   ngOnInit(): void {
     this.getList();
@@ -28,22 +28,22 @@ export class ListPendingBookingComponent implements OnInit {
   }
 
   cancel(bookingId: number) {
-    this.bookingService.cancel(bookingId,async (response) =>{
+    this.bookingService.cancel(bookingId, async (response) => {
       const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
-        if (result.dismiss) {
-          this.router.navigate([this.router.url]);
-        }
-    },error=>{
+      if (result.dismiss) {
+        this.getList();
+      }
+    }, error => {
     });
   }
 
   approve(bookingId: number) {
-    this.bookingService.approve(bookingId,async (response) =>{
+    this.bookingService.approve(bookingId, async (response) => {
       const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
-        if (result.dismiss) {
-          this.router.navigate([this.router.url]);
-        }
-    },error=>{
+      if (result.dismiss) {
+        this.getList();
+      }
+    }, error => {
     });
   }
 }

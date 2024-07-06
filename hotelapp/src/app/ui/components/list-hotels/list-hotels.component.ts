@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import KeenSlider, { KeenSliderInstance } from 'keen-slider';
 import { HotelImageService } from 'src/app/services/common/models/hotel-image.service';
 import { HotelService } from 'src/app/services/common/models/hotel.service';
@@ -23,17 +23,23 @@ export class ListHotelsComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private hotelService: HotelService,
     private imageService: HotelImageService,
     private selectionService: MainFacilitySelectionService
   ) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.route.queryParams.subscribe(params => {
+      this.cityId = params['cityId'] ? +params['cityId'] : null;
+      this.stars = params['stars'] ? +params['stars'] : null;
+      this.capacity = params['capacity'] ? +params['capacity'] : null;
+      this.getAll();
+    });
   }
 
   async getAll(): Promise<void> {
-    const hotelData = await this.hotelService.getAll();
+    const hotelData = await this.hotelService.getHotelsByFilter(this.cityId, this.capacity, this.stars);
     this.listHotels = hotelData as ListHotel[];
 
     for (const hotel of this.listHotels) {

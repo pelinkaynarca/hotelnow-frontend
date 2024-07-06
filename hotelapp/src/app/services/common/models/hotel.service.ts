@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpStatusCode, HttpParams } from '@angular/common/http';
 import { UpdateHotel } from 'src/app/shared/models/hotels/update-hotel';
 import { ListHotelForStaff } from 'src/app/shared/models/hotels/list-hotel-for-staff';
 import { ListHotel } from 'src/app/shared/models/hotels/list-hotel';
@@ -52,12 +52,22 @@ export class HotelService {
       : response.statusMessage;
   }
 
-  /* FILTERING 
-  async getHotelsByFilter(cityName: string | null, active: boolean | null) {
-    const observable: Observable<BaseResponse<ListHotel[]>> = this.httpClientService.get({
+  async getHotelsByFilter(cityId: number | null, capacity: number | null, stars: number | null ) {
+    let params = new HttpParams();
+    if (cityId !== null) {
+      params = params.set('cityId', cityId.toString());
+    }
+    if (capacity !== null) {
+      params = params.set('capacity', capacity.toString());
+    }
+    if (stars !== null) {
+      params = params.set('stars', stars.toString());
+    }
+
+    const observable: Observable<BaseResponse<ListHotel[]>> = this.httpClientService.get<BaseResponse<ListHotel[]>>({
       controller: 'hotels',
-      action: `filter-by`,
-      queryString: `cityName=${cityName}&active=${active}`
+      action: 'filter',
+      queryString: params.toString()
     });
 
     const response = await firstValueFrom(observable);
@@ -65,7 +75,7 @@ export class HotelService {
     return response.statusCode === HttpStatusCode.Ok
       ? response.result
       : response.statusMessage;
-  } */
+  }
 
  
    async create(hotel: AddHotel, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {

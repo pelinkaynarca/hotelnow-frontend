@@ -2,7 +2,14 @@
   <div *ngFor="let hotel of listHotels" class="flex flex-row bg-white rounded-md shadow h-[300px] w-[850px]">
     <a [routerLink]="['/hotel', hotel.id]" class="no-underline w-full h-full flex">
       <div class="w-2/6 h-full bg-gray-200 rounded-l-md">
-        <img class="w-full h-full object-cover rounded-l-md" [src]="" alt="Image">
+        <img *ngIf="hotel.hotelImages && hotel.hotelImages.length > 0"
+             class="w-full h-full object-cover rounded-l-md" 
+             [src]="hotel.hotelImages[0].path" 
+             alt="Image">
+        <div *ngIf="!hotel.hotelImages || hotel.hotelImages.length === 0" 
+             class="w-full h-full flex items-center justify-center text-gray-500">
+          No Image Available
+        </div>
       </div>
       <div class="flex flex-col p-3 w-4/6">
         <p class="text-xl font-bold text-primary-blue">{{ hotel.name }}</p>

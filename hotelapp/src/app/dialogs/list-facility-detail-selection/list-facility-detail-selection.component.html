@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <p class="modal-title font-bold text-lg text-primary-blue">Facility Details</p>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeDialog()"></button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let category of facilityCategories">
+        <ng-template [ngIf]="hasSelectedOptions(category)">
+          <p class="font-bold text-lg">{{ category.title }}</p>
+          <ul>
+            <li *ngFor="let option of category.facilityDetailOptionResponse" 
+                [ngClass]="{ 'selected': isSelected(option.description) }">
+              {{ option.description }}
+            </li>
+          </ul>
+        </ng-template>
+      </div>          
+  </div>
+  

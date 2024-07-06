@@ -17,6 +17,9 @@ export class ListHotelsComponent implements OnInit {
   @Input() data: { hotelId: number };
   listHotels: ListHotel[] = [];
   hotelId!: number;
+  @Input() cityId: number | null = null;
+  @Input() stars: number | null = null;
+  @Input() capacity: number | null = null;
 
   constructor(
     private router: Router,
@@ -35,13 +38,10 @@ export class ListHotelsComponent implements OnInit {
 
     for (const hotel of this.listHotels) {
       hotel.mainFacilitySelections = await this.selectionService.getRandomByHotelId(hotel.id) as ListMainFacilitySelection[];
-    }
-
-    this.listHotels.forEach(hotel => {
       hotel.hotelImages.forEach(image => {
         image.path = environment.photoUrl + image.path;
       });
-    });
+    }
   }
 
   createRange(number: number): number[] {

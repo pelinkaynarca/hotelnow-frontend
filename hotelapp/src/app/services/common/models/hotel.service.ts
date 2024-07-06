@@ -77,6 +77,19 @@ export class HotelService {
       : response.statusMessage;
   }
 
+  async getHotelNoStaff(){
+    const observable: Observable<BaseResponse<ListHotel[]>> = this.httpClientService.get({
+      controller: 'hotels',
+      action: 'no-staff'
+    })
+
+    const response = await firstValueFrom(observable);
+
+    return response.statusCode === HttpStatusCode.Ok
+      ? response.result
+      : response.statusMessage;
+  }
+
  
    async create(hotel: AddHotel, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
      const observable: Observable<AddHotel> = this.httpClientService.post({

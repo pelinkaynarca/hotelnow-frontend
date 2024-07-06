@@ -16,15 +16,15 @@ export class NeighborhoodComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['districtId'] && this.districtId !== null) {
-      this.getNeighborhoodsByCity(this.districtId);
+      this.getNeighborhoodsByDistrict(this.districtId);
     }
   }
 
-  async getNeighborhoodsByCity(districtId: number) {
+  async getNeighborhoodsByDistrict(districtId: number) {
       this.listNeighborhoods = await this.neighborhoodService.getByDistrictId(districtId) as ListNeighborhood[];
   }
 
-  onSelectDistrict(event: Event): void {
+  onSelectNeighborhood(event: Event): void {
     const selectedNeighborhoodId = (event.target as HTMLSelectElement).value;
     if (selectedNeighborhoodId) {
       this.neighborhoodSelected.emit(+selectedNeighborhoodId);

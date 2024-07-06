@@ -1,0 +1,51 @@
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()"
+    class="gap-4 grid grid-cols-1 lg:grid-cols-2 mb-4 bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <div class="form-group">
+        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">E posta</label>
+        <input type="text"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            formControlName="email" placeholder="E posta">
+            <div *ngIf="createForm.get('email')?.touched && createForm.get('email')?.invalid"
+            class="text-red-500 text-xs italic mt-1">
+            Lütfen email formatında giriniz.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Şifre</label>
+        <div class="relative">
+            <input [type]="hide ? 'password' : 'text'"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                formControlName="password" placeholder="Şifre">
+            <i class="fa-solid fa-eye-slash absolute top-2 right-2 cursor-pointer" *ngIf="hide"
+                (click)="toPassword()"></i>
+            <i class="fa-solid fa-eye absolute top-2 right-2 cursor-pointer" *ngIf="!hide" (click)="toPassword()"></i>
+        </div>
+        <div *ngIf="createForm.get('password')?.touched && createForm.get('password')?.invalid"
+            class="text-red-500 text-xs italic mt-1">
+            Lütfen en az 5 karakterli şifre giriniz.
+        </div>
+    </div>
+
+    <div class="form-group col-span-2">
+        <label for="hotelId" class="block text-gray-700 text-sm font-bold mb-2">Otel Seçiniz</label>
+        <select
+            class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            formControlName="hotelId">
+            <option value="0" selected>Seçiniz</option>
+            <option *ngFor="let hotel of listHotels" [value]="hotel.id">
+                {{ hotel.name }}
+            </option>
+        </select>
+        <div *ngIf="createForm.get('hotelId')?.touched && createForm.get('hotelId')?.invalid"
+            class="text-red-500 text-xs italic mt-1">
+            Otel seçimi zorunludur.
+        </div>
+    </div>
+
+    <div class="col-span-2 text-right">
+        <button type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            [disabled]="!createForm.valid">Yönetici Oluştur</button>
+    </div>
+</form>

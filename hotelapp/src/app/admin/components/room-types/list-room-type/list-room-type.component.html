@@ -32,6 +32,7 @@
         <td>{{ roomType.pricePerNight | number:'1.2-2' }} {{ selectedCurrency }}</td>
         <td>
           <i class="fa-solid fa-door-open" title="Odalar" (click)="showRooms(roomType.id)"></i>
+          <i class="fa-solid fa-door-open" title="Odalar" (click)="showDetail(roomType.id)"></i>
         </td>
         <td>
           <i class="fa-solid fa-image fa-lg" title="Oda tipinin fotoğrafları" (click)="showPhotos(roomType.id)"></i>

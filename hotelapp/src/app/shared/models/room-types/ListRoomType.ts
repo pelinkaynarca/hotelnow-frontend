@@ -1,4 +1,6 @@
 import { ListImage } from "../images/list-image";
+import { ListRoomTypeDetailSelection } from "../room-type-detail-selections/list-room-type-detail-selection";
+import { ListRoom } from "../rooms/list-room";
 
 export class ListRoomType{
     id: number;
@@ -11,5 +13,7 @@ export class ListRoomType{
     capacity: Uint8Array;
     display: boolean;
     currency: string = "TRY";
-    photos?: ListImage[];
+    roomTypeImages?: ListImage[];
+    roomTypeFacilityDetailSelections?: ListRoomTypeDetailSelection[];
+    rooms: ListRoom[];
 }

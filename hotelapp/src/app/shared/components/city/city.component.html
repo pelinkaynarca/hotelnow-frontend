@@ -1,5 +1,4 @@
-<label>Şehir Seçimi</label>
-<select (change)="onSelectCity($event)">
+<select class="pl-9 h-full border-primary-blue border-[1px] focus:border-2 focus:outline-primary-blue rounded-lg" (change)="onSelectCity($event)">
     <option selected>Seçiniz</option>
     <option *ngFor="let city of listCities" [value]="city.id">
         {{ city.name }}

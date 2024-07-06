@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h5 class="modal-title">Oda Tipinin Fotoğraf İşlemleri</h5>
+  <button type="button" class="btn-close" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <div class="navigation-wrapper">
+    <div class="keen-slider" #sliderRef>
+      <div class="keen-slider__slide" *ngFor="let image of listRoomType.roomTypeImages">
+        <img [src]="image | imageArray" style="width: 100%; height: 350px; border-radius: 30px; object-fit: cover;" />
+      </div>
+      <svg [ngClass]="'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')" (click)="slider.prev()"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="arrow left-arrow">
+        <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+      </svg>
+      <svg *ngIf="slider"
+        [ngClass]="'arrow arrow--right ' + (slider.track.details.slides.length - 1 === currentSlide ? 'arrow--disabled' : '')"
+        (click)="slider.next()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="arrow right-arrow">
+        <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+      </svg>
+    </div>
+  </div>
+  <div class="detail">
+    <ul class="mb-4">
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-up-right-and-down-left-from-center inline-block mr-2"></i>
+        <p class="inline">{{listRoomType.size}} metre kare</p>
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-street-view inline-block mr-2"></i>
+        <p class="inline">{{listRoomType.viewTypeName}}</p>
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-users inline-block mr-2"></i>
+        <p class="inline">{{listRoomType.capacity}} kişilik</p>
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-bed inline-block mr-2"></i>
+        <p class="inline">{{listRoomType.bedTypeName}}</p>
+      </li>
+    </ul>
+
+    <div class="facility">
+      <h2 class="facility-text">Oda imkân ve olanakları</h2>
+      <ul>
+        <li *ngFor="let selections of listRoomType.roomTypeFacilityDetailSelections" class="mb-2">
+          <span class="category-name">{{selections.categoryName}}</span>
+          <div *ngFor="let response of selections.roomTypeFacilityDetailSelectionResponses">
+            <p style="display: inline-block; margin-right: 5px;">•</p> {{response.optionDescription}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -16,7 +16,10 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'hotel-search', component: HotelSearchComponent },
+      {
+        path: 'search',
+        loadChildren: () => import('./pages/hotel-search/hotel-search.module').then(m => m.HotelSearchModule),
+      },
       { path: 'hotel/:id', component: HotelDetailsComponent },
     ]
   },

@@ -5,6 +5,9 @@ import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { HotelInfoComponent } from './hotel-info/hotel-info.component';
 import { HomeFilterComponent } from './home-filter/home-filter.component';
 import { HomeExploreCitiesComponent } from './home-explore-cities/home-explore-cities.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -15,7 +18,10 @@ import { HomeExploreCitiesComponent } from './home-explore-cities/home-explore-c
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        SharedModule,
+        FormsModule,
+        NgbModule
     ],
     exports: [
         ListHotelsComponent,

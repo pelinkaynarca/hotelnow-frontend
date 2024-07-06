@@ -5,6 +5,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
     imports: [
       CommonModule,
       RouterModule,
-      NgbCollapseModule
+      NgbCollapseModule,
+      BrowserAnimationsModule
     ],
     exports: [
       HeaderComponent,

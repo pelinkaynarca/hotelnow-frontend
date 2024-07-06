@@ -34,6 +34,12 @@ const routes: Routes = [
         data: { roles: ['MANAGER'] }
       },
       {
+        path: 'hotel-and-manager',
+        loadChildren: () => import('./components/hotel-and-manager/hotel-and-manager.module').then(m => m.HotelAndManagerModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }
+      },
+      {
         path: 'room-type-main-facilities',
         loadChildren: () => import('./components/room-type-main-facilities/room-type-main-facility.module')
         .then(m => m.RoomTypeMainFacilityModule),
@@ -51,21 +57,20 @@ const routes: Routes = [
         .then(m => m.DistrictModule)
       },
       {
-        path: 'managers',
-        loadChildren: () => import('./components/managers/manager-routing.module')
-        .then(m => m.ManagerRoutingModule)
-      },
-      {
         path: 'cities',
         loadChildren: () => import('./components/cities/city.module').then(m => m.CityModule)
       },
       {
         path: 'facility-categories',
-        loadChildren: () => import('./components/facility-categories/facility-category.module').then(m => m.FacilityCategoryModule)
+        loadChildren: () => import('./components/facility-categories/facility-category.module').then(m => m.FacilityCategoryModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }
       },
       {
         path: 'room-type-detail-categories',
-        loadChildren: () => import('./components/room-type-detail-categories/room-type-detail-category.module').then(m => m.RoomTypeDetailCategoryModule)
+        loadChildren: () => import('./components/room-type-detail-categories/room-type-detail-category.module').then(m => m.RoomTypeDetailCategoryModule),
+        canActivate: [RoleGuard],
+        data: { roles: ['ADMIN'] }  
       },
       {
         path: 'main-facility-options',

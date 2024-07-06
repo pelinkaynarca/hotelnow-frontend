@@ -11,6 +11,6 @@ export const RoleGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
     return true;
   }
 
-  router.navigate(['/unauthorized'], { queryParams: { returnUrl: '/admin' } });
+  router.navigate(['/admin']);
   return false;
 }

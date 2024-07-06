@@ -1,7 +1,6 @@
-<label>İlçe Seçimi</label>
 <select (change)="onSelectDistrict($event)">
   <option selected>Seçiniz</option>
     <option *ngFor="let district of listDistricts" [value]="district.id">
       {{ district.name }}
-    </option>
-  </select>
+  </option>
+</select>

@@ -4,6 +4,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { ListStaff } from 'src/app/shared/models/staffs/list-staff';
 import { AddStaff } from 'src/app/shared/models/staffs/add-staff';
+import { AddManager } from 'src/app/shared/models/managers/add-manager';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,21 @@ export class StaffService {
     });
   }
 
+  async addStaffForAdmin(request: AddManager, successCallBack: () => void, errorCallBack: (errorMessage: string) => void){
+    const observable: Observable<AddManager> =
+      this.httpClientService.post({
+        controller: 'staffs',
+        action: 'add-staff-for-admin'
+      }, request);
+
+    await firstValueFrom(observable).then(response => {
+      successCallBack();
+      return response;
+    }).catch(errorResponse => {
+      errorCallBack(errorResponse);
+    });
+  }
+  
   async delete(id: number) {
     const observable: Observable<BaseResponse<string>> =
       this.httpClientService.delete({

@@ -11,7 +11,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FacilityCategoryModule } from './facility-categories/facility-category.module';
 import { RoomTypeDetailCategoryModule } from './room-type-detail-categories/room-type-detail-category.module';
 import { MainFacilityOptionModule } from './main-facility-options/main-facility-option.module';
-import { ManagerModule } from './managers/manager.module';
 import { BookingModule } from './bookings/booking.module';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { BookingModule } from './bookings/booking.module';
     FacilityCategoryModule,
     RoomTypeDetailCategoryModule,
     MainFacilityOptionModule,
-    ManagerModule,
     BookingModule
   ],
   exports:[

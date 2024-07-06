@@ -19,7 +19,7 @@ export class AddHotelComponent {
     private fb: FormBuilder,
     private router: Router,
     private sweetAlertService: SweetAlertService,
-    private hotelService: HotelService){
+    private hotelService: HotelService) {
     this.createForm = this.fb.group({
       name: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       stars: new FormControl('0', selectValidator()),
@@ -28,7 +28,7 @@ export class AddHotelComponent {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   isValid(formControlName: string) {
@@ -36,23 +36,22 @@ export class AddHotelComponent {
     return formControl?.invalid && (formControl?.touched);
   }
 
-  onSubmit(){
-    if (this.createForm.valid) 
-      return;
 
-    const formData = this.createForm.value;
-    const addHotel: AddHotel = {
-      name: formData.name,
-      stars: formData.stars,
+  onSubmit() {
+    if (this.createForm.valid) {
+      const formData = this.createForm.value;
+      const addHotel: AddHotel = {
+        name: formData.name,
+        stars: formData.stars,
+      };
+
+      this.hotelService.create(addHotel, async () => {
+        const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
+        if (result.dismiss) {
+          this.router.navigate(['/admin', 'managers','create'])
+        }
+      }, error => {
+      });
     }
-
-    this.hotelService.create(addHotel, async ()=>{
-     const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces)
-     if(result.dismiss)
-      this.router.navigate(['/admin', 'manager-create'])
-    },
-    error => {
-
-    })
   }
 }

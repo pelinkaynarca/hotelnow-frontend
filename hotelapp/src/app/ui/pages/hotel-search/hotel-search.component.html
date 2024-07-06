@@ -1,3 +1,4 @@
 <div class="flex flex-col justify-center items-center flex-wrap py-3">
-    <app-list-hotels></app-list-hotels>
+    <app-home-filter (filtersApplied)="onFiltersApplied($event)"></app-home-filter>
+    <app-list-hotels [cityId]="cityId" [stars]="stars" [capacity]="capacity"></app-list-hotels>
 </div>

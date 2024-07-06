@@ -1,0 +1,28 @@
+<div class="flex space-x-4">
+    <div class="w-1/3">
+      <label for="city" class="block font-bold mb-1">Şehir</label>
+      <!-- <app-city (citySelected)="onCitySelected($event)"></app-city> -->
+    </div>
+  
+    <div class="w-1/3">
+      <label for="stars" class="block font-bold mb-1">Otel Yıldızı</label>
+      <div class="flex space-x-1 star-rating">
+        <span class="star" (click)="setStars(1)" [class.filled]="selectedStars >= 1">&#9733;</span>
+        <span class="star" (click)="setStars(2)" [class.filled]="selectedStars >= 2">&#9733;</span>
+        <span class="star" (click)="setStars(3)" [class.filled]="selectedStars >= 3">&#9733;</span>
+        <span class="star" (click)="setStars(4)" [class.filled]="selectedStars >= 4">&#9733;</span>
+        <span class="star" (click)="setStars(5)" [class.filled]="selectedStars >= 5">&#9733;</span>
+      </div>
+    </div>
+  
+  <div class="w-1/3">
+    <label for="capacity" class="block font-bold mb-1">Kişi Sayısı</label>
+    <select class="form-control" (change)="setCapacity($event)">
+      <option value="0" selected>Seçiniz</option>
+      <option *ngFor="let cap of [1, 2, 3, 4, 5]" [value]="cap">{{cap}} Kişilik Oda</option>
+    </select>
+  </div>
+</div>
+  
+  <button class="btn btn-primary mt-3" (click)="applyFilters()">Filtrele</button>
+  

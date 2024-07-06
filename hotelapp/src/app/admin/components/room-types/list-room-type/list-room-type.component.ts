@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetStatus } from 'src/app/base/sweet-alert/sweet-alert-status';
+import { RoomTypeDetailComponent } from 'src/app/dialogs/room-type-detail/room-type-detail.component';
 import { RoomTypeFacilityDetailSelectionComponent } from 'src/app/dialogs/room-type-facility-detail-selection/room-type-facility-detail-selection.component';
 import { RoomTypeImageComponent } from 'src/app/dialogs/room-type-image/room-type-image.component';
 import { RoomComponent } from 'src/app/dialogs/room/room.component';
@@ -61,6 +62,13 @@ export class ListRoomTypeComponent implements OnInit {
   async showRooms(roomTypeId: number) {
     this.dialogService.openDialog({
       componentType: RoomComponent,
+      data: { roomTypeId },
+    });
+  }
+
+  async showDetail(roomTypeId: number) {
+    this.dialogService.openDialog({
+      componentType: RoomTypeDetailComponent,
       data: { roomTypeId },
     });
   }

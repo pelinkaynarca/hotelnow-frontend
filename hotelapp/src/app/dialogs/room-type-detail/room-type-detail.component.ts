@@ -18,7 +18,8 @@ export class RoomTypeDetailComponent implements OnInit, OnDestroy, AfterViewInit
   slider: KeenSliderInstance | null = null; 
   
   constructor(
-    private roomTypeService: RoomTypeService
+    private roomTypeService: RoomTypeService,
+    private activeModal: NgbActiveModal
   ) { }
 
   ngOnInit(): void {
@@ -51,5 +52,7 @@ export class RoomTypeDetailComponent implements OnInit, OnDestroy, AfterViewInit
     if (this.slider) this.slider.destroy();
   }
 
-
+  close() {
+    this.activeModal.close();
+  }
 }

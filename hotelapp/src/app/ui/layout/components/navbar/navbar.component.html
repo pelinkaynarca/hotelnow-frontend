@@ -19,7 +19,7 @@
                 <p *ngIf="!isLoggedIn" class="opacity-70">|</p>
                 <li *ngIf="!isLoggedIn"><a class="text-sm p-0.5 opacity-70 hover:opacity-100 hover:text-primary-blue" routerLink="register">Sign up</a></li>
                 <li *ngIf="isLoggedIn" class="flex items-center">
-                    <a class="text-sm p-0.5 opacity-70 hover:opacity-100 hover:text-primary-blue" (click)="logout()">Log out</a>
+                    <a class="text-sm p-0.5 opacity-70 hover:opacity-100 hover:text-primary-blue cursor-pointer" (click)="logout()">Log out</a>
                 </li>
             </ul>
         </div>

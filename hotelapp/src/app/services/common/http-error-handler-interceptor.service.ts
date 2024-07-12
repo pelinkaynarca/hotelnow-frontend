@@ -33,7 +33,7 @@ export class HttpErrorHandlerInterceptorService {
           //     }
           //   }
           //   break;
-          case HttpStatusCode.Forbidden:
+          //case HttpStatusCode.Forbidden:
           case HttpStatusCode.InternalServerError:
           case HttpStatusCode.BadRequest:
           case HttpStatusCode.NotFound:

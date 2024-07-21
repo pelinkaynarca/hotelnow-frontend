@@ -5,6 +5,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { ListBooking } from 'src/app/shared/models/bookings/list-booking';
 import { HttpStatusCode } from '@angular/common/http';
+import { CancelBooking } from 'src/app/shared/models/bookings/cancel-booking';
 
 @Injectable({
   providedIn: 'root'
@@ -48,13 +49,14 @@ export class BookingService {
     });
   }
 
-  async cancel(bookingId: number,successCallBack: (response:BaseResponse<string>) => void, errorCallBack: (errorMessage: string) => void) {
-    const observable: Observable<BaseResponse<string>> = this.httpClientService.get({
+  async cancel(cancelRequest: CancelBooking, successCallBack: () => void, errorCallBack: (errorMessage: string) => void) {
+    const observable: Observable<CancelBooking> = this.httpClientService.post({
       controller: 'bookings',
-      action: `cancel/${bookingId}`
-    });
-    const baseResponse = await firstValueFrom(observable).then(response => {
-      successCallBack(response);
+      action: 'cancel'
+    }, cancelRequest);
+    await firstValueFrom(observable).then(response => {
+      successCallBack();
+      return response;
     }).catch(errorResponse => {
       errorCallBack(errorResponse);
     });

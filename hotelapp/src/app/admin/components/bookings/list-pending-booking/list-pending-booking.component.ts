@@ -6,6 +6,7 @@ import { SweetAlertService } from 'src/app/services/admin/sweet-alert.service';
 import { BookingService } from 'src/app/services/common/models/booking.service';
 import { BaseResponse } from 'src/app/shared/models/BaseResponse';
 import { BookingStatus } from 'src/app/shared/models/bookings/booking-status';
+import { CancelBooking } from 'src/app/shared/models/bookings/cancel-booking';
 import { ListBooking } from 'src/app/shared/models/bookings/list-booking';
 
 @Component({
@@ -28,7 +29,11 @@ export class ListPendingBookingComponent implements OnInit {
   }
 
   cancel(bookingId: number) {
-    this.bookingService.cancel(bookingId, async (response) => {
+    let cancelrequest: CancelBooking = {
+      id: bookingId,
+      reason: null // TO-DO: cancellation reason
+    };
+    this.bookingService.cancel(cancelrequest, async () => {
       const result = await this.sweetAlertService.showAlert(SweetStatus.sweetSucces);
       if (result.dismiss) {
         this.getList();

@@ -1,59 +1,69 @@
-<div class="flex justify-center items-center h-screen bg-gray-100">
-  <form [formGroup]="isRegister" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
+<div class="flex justify-center items-center min-h-[calc(100vh-275px)]">
+    <form [formGroup]="isRegister" (ngSubmit)="onSubmit()" class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center">Kayıt Ol</h2>
+      
       <div class="mb-4">
-          <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-          <input type="text" name="email" id="email" placeholder="Email" formControlName="email"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+        <input type="text" name="email" id="email" placeholder="Email" formControlName="email"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
       </div>
+  
       <div class="mb-6">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 flex items-center">
-            Password
-            <i class="fa-solid fa-eye-slash fa-xs ml-2 cursor-pointer" *ngIf="hide" (click)="toPassword()"></i>
-            <i class="fa-solid fa-eye fa-xs ml-2 cursor-pointer" *ngIf="!hide" (click)="toPassword()"></i>
+        <label for="password" class="block text-gray-700 text-sm font-medium mb-2 flex items-center">
+          Şifre
+          <i class="fa-solid fa-eye-slash fa-xs ml-2 cursor-pointer" *ngIf="hide" (click)="toPassword()"></i>
+          <i class="fa-solid fa-eye fa-xs ml-2 cursor-pointer" *ngIf="!hide" (click)="toPassword()"></i>
         </label>
         <input type="password" name="password" id="password" [type]="hide ? 'password' : 'text'"
-            placeholder="Şifre" formControlName="password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
+          placeholder="Şifre" formControlName="password"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+      </div>
+  
       <div class="mb-4">
-        <label for="firstName" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
-        <input type="text" name="firstName" id="firstName" placeholder="firstName" formControlName="firstName"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="lastName" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
-        <input type="text" name="lastName" id="lastName" placeholder="lastName" formControlName="lastName"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="birthDate" class="block text-gray-700 text-sm font-bold mb-2">Birth Date</label>
-        <input type="date" name="birthDate" id="birthDate" placeholder="birthDate" formControlName="birthDate"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
-        <input type="text" name="phone" id="phone" placeholder="Email" formControlName="phone"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    </div>
-    <div class="mb-4">
-        <label for="gender" class="block text-gray-700 text-sm font-bold mb-2">Gender</label>
-        <select id="gender" name="gender" formControlName="gender" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="" disabled>Select Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
+        <label for="firstName" class="block text-gray-700 text-sm font-medium mb-2">Ad</label>
+        <input type="text" name="firstName" id="firstName" placeholder="Ad" formControlName="firstName"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+      </div>
+  
+      <div class="mb-4">
+        <label for="lastName" class="block text-gray-700 text-sm font-medium mb-2">Soyad</label>
+        <input type="text" name="lastName" id="lastName" placeholder="Soyad" formControlName="lastName"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+      </div>
+  
+      <div class="mb-4">
+        <label for="birthDate" class="block text-gray-700 text-sm font-medium mb-2">Doğum Tarihi</label>
+        <input type="date" name="birthDate" id="birthDate" placeholder="Doğum Tarihi" formControlName="birthDate"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+      </div>
+  
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-700 text-sm font-medium mb-2">Telefon</label>
+        <input type="text" name="phone" id="phone" placeholder="Telefon" formControlName="phone"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+      </div>
+  
+      <div class="mb-4">
+        <label for="gender" class="block text-gray-700 text-sm font-medium mb-2">Cinsiyet</label>
+        <select id="gender" name="gender" formControlName="gender"
+          class="block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+          <option value="" disabled>Select Gender</option>
+          <option value="M">Erkek</option>
+          <option value="F">Kadın</option>
         </select>
-    </div>
-      
+      </div>
+  
       <div class="flex items-center justify-center">
         <button type="submit"
-            [ngClass]="{
-                'bg-blue-500 hover:bg-blue-700': isRegister.valid,
-                'bg-gray-400 cursor-not-allowed': isRegister.invalid
-            }"
-            [disabled]="isRegister.invalid"
-            class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Kayıt Ol
+          [ngClass]="{
+            'bg-blue-500 hover:bg-blue-600': isRegister.valid,
+            'bg-gray-400 cursor-not-allowed': isRegister.invalid
+          }"
+          [disabled]="isRegister.invalid"
+          class="w-full py-2 px-4 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+          Kayıt Ol
         </button>
-    </div>
-  </form>
-</div>
+      </div>
+    </form>
+  </div>
+  

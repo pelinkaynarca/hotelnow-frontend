@@ -14,7 +14,7 @@ export class RoomTypeDetailComponent implements OnInit, OnDestroy, AfterViewInit
   listRoomType: ListRoomType;
   @Input() data!: { roomTypeId: number };
   currentSlide: number = 0;
-  dotHelper: Array<Number> = []
+  dotHelper: Array<Number> = [];
   slider: KeenSliderInstance | null = null; 
   
   constructor(

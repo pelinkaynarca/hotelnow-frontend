@@ -1,23 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ListHotel } from 'src/app/shared/models/hotels/list-hotel';
 import { HotelService } from 'src/app/services/common/models/hotel.service'
-import { environment } from 'src/environments/environment';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { ListFacilityDetailSelectionComponent } from 'src/app/dialogs/list-facility-detail-selection/list-facility-detail-selection.component';
-import { ListFacilityDetailSelection } from 'src/app/shared/models/facility-detail-selections/list-facility-detail-selection';
+import KeenSlider,{ KeenSliderInstance } from 'keen-slider';
+
 
 @Component({
-    selector: 'app-hotel-info',
-    templateUrl: './hotel-info.component.html',
-    styleUrls: ['./hotel-info.component.scss']
-  })
-export class HotelInfoComponent implements OnInit {
+  selector: 'app-hotel-info',
+  templateUrl: './hotel-info.component.html',
+  styleUrls: ['./hotel-info.component.scss']
+})
+export class HotelInfoComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild("sliderRef") sliderRef: ElementRef<HTMLElement>;
   @Input() hotel: ListHotel;
-  facilityDetailSelections: ListFacilityDetailSelection[] = []; 
+  currentSlide: number = 0;
+  dotHelper: Array<Number> = [];
+  slider: KeenSliderInstance | null = null; 
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private hotelService: HotelService,
     private dialogService: DialogService
@@ -30,34 +32,34 @@ export class HotelInfoComponent implements OnInit {
     });
   }
 
-  async fetchHotelById(hotelId: number): Promise<void> {
-    try {
-      const hotel = await this.hotelService.getById(hotelId);
-
-      if (typeof hotel === 'string') {
-        console.error('Error fetching hotel:', hotel);
-      } else {
-        this.hotel = hotel;
-        this.facilityDetailSelections = hotel.facilityDetailSelections; // Assign facilityDetailSelections here
-        this.processHotelImages(); 
-      }
-    } catch (error) {
-      console.error('Error fetching hotel:', error);
-    }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slider = new KeenSlider(this.sliderRef.nativeElement, {
+        initial: this.currentSlide,
+        slideChanged: (s) => {
+          this.currentSlide = s.track.details.rel
+        },
+      })
+      this.dotHelper = [
+        ...Array(this.slider.track.details.slides.length).keys(),
+      ]
+    }, 200)
   }
 
-  processHotelImages(): void {
-    if (this.hotel && this.hotel.hotelImages) {
-      this.hotel.hotelImages.forEach(image => {
-        image.path = environment.photoUrl + image.path;
-      });
-    }
+  ngOnDestroy() {
+    if (this.slider) this.slider.destroy();
+  }
+
+  fetchHotelById(hotelId: number) {
+    this.hotelService.getById(hotelId).then(data => {
+      this.hotel = data as ListHotel;
+    });
   }
 
   showFacilityDetailSelections(hotelId: number): void {
     this.dialogService.openDialog({
       componentType: ListFacilityDetailSelectionComponent,
-      data: { hotelId, facilityDetailSelections: this.facilityDetailSelections } // Pass facilityDetailSelections
+      data: { hotelId }
     });
   }
 

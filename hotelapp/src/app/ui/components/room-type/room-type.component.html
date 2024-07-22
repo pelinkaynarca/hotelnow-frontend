@@ -1,0 +1,36 @@
+<div class="flex flex-wrap gap-4">
+<div *ngFor="let roomType of listRoomTypes" class="bg-white shadow-lg rounded-lg overflow-hidden w-[330px]">
+      <div class="keen-slider__slide">
+        <img [src]="roomType.roomTypeImages[0] | imageArray" class="w-full h-48 object-cover rounded-t-lg" />
+      </div>
+  <div class="p-4">
+    <h2 class="text-lg font-bold mb-4">{{ roomType.name }}</h2>
+    <ul class="list-none p-0 mb-4">
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-person-through-window mr-2 text-gray-600"></i> 
+        {{ roomType.viewTypeName }}
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-ruler-combined mr-2 text-gray-600"></i> 
+        {{ roomType.size }} metre kare
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-users mr-2 text-gray-600"></i> 
+        {{ roomType.capacity }} kişilik
+      </li>
+      <li class="flex items-center mb-2">
+        <i class="fa-solid fa-bed mr-2 text-gray-600"></i> 
+        {{ roomType.bedTypeName }}
+      </li>
+    </ul>
+    <p class="cursor-pointer font-semibold text-primary-blue hover:underline" (click)="showFacilityDetailSelections(roomType.id)">
+      Daha çok detay > 
+    </p>
+
+    <div class="flex flex-col bg-gray-100 p-4 rounded-lg border border-gray-200 mt-4">
+      <p class="text-sm text-gray-600">Oda Fiyat:</p>
+      <p class="text-xl font-bold text-primary-blue mt-1">{{ roomType.pricePerNight }} {{roomType.currency}}</p>
+    </div>
+  </div>
+</div>
+</div>

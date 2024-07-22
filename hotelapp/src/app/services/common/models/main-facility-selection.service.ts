@@ -13,6 +13,19 @@ export class MainFacilitySelectionService {
   constructor(private httpClientService: HttpClientService) { }
 
 
+  async getByHotelId(hotelId: number){
+    const observable: Observable<BaseResponse<ListMainFacilitySelection[]>> = this.httpClientService.get({
+      controller: 'main-facility-selections',
+      action: 'by-hotel-id'
+    }, hotelId);
+
+    const response = await firstValueFrom(observable);
+
+    return response.statusCode === HttpStatusCode.Ok
+      ? response.result
+      : response.statusMessage;
+  }
+
   async getByHotelIdForStaff() {
     const observable: Observable<BaseResponse<ListMainFacilitySelection[]>> = this.httpClientService.get({
       controller: 'main-facility-selections',

@@ -28,9 +28,9 @@ import { RoomTypeDetailComponent } from "./room-type-detail/room-type-detail.com
   ],
     imports:[
       ReactiveFormsModule,
-        CommonModule,
-        FormsModule,
-        PipesModule,
+      CommonModule,
+      FormsModule,
+      PipesModule,
     ]
 })
 export class DialogModule{}

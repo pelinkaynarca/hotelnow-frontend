@@ -8,26 +8,31 @@ import { HomeExploreCitiesComponent } from './home-explore-cities/home-explore-c
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RoomTypeComponent } from './room-type/room-type.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
     declarations: [
         ListHotelsComponent,
         HotelInfoComponent,
         HomeFilterComponent,
-        HomeExploreCitiesComponent
+        HomeExploreCitiesComponent,
+        RoomTypeComponent
     ],
     imports: [
         CommonModule,
         RouterModule,
         SharedModule,
         FormsModule,
-        NgbModule
+        NgbModule,
+        PipesModule
     ],
     exports: [
         ListHotelsComponent,
         HotelInfoComponent,
         HomeFilterComponent,
-        HomeExploreCitiesComponent
+        HomeExploreCitiesComponent,
+        RoomTypeComponent
     ]
 })
 export class ComponentsModule { }

@@ -12,14 +12,19 @@ export class HeaderComponent implements OnInit{
   dropdownOpen = false;
   @Input() sidebarOpen: boolean = true;
 
-  constructor(private authService:AuthService, private router:Router){}
+  loggedInUsername:String="-";
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    
+    if (this.authService.isAuthenticated()) {
+      let decodedToken = this.authService.decodeToken();
+      this.loggedInUsername = decodedToken.firstName + " " + decodedToken.lastName;
+    }
   }
 
   onToggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen; 
+    this.sidebarOpen = !this.sidebarOpen;
     this.toggleSidebar.emit();
   }
 

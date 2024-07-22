@@ -4,6 +4,10 @@ import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
   roles: string[];
+  firstName: string;
+  lastName: string;
+  userId: number;
+  sub: string; // Email
 }
 
 @Injectable({
